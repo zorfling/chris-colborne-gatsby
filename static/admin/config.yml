@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: zorfling/gatsby-chris-colborne
+  repo: zorfling/chris-colborne-gatsby
 
 media_folder: static/assets
 public_folder: assets
