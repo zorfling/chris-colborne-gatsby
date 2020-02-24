@@ -11,7 +11,7 @@ description: >-
 ---
 Over the Christmas break, I decided to write a SharePoint scraper in Python.
 
-At work we have a SharePoint based wiki that is universally disliked and thus is poorly used despite containing a lot of useful information. I've been trialling Atlassian Confluence as a replacement and it seems a much better solution. However we don't want to run multiple wikis so I'll need to copy the existing data across.
+At work we have a SharePoint based wiki that is universally disliked and thus is poorly used despite containing a lot of useful information. I've been trialling Atlassian Confluence as a replacement, and it seems a much better solution. However we don't want to run multiple wikis so I'll need to copy the existing data across.
 
 Gaining permission to use any APIs that SharePoint might expose over the Christmas break was obviously not going to happen, so I decided to use Python and Mechanize to scrape the wiki.
 
