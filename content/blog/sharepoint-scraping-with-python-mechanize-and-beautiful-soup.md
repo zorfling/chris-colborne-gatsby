@@ -1,0 +1,83 @@
+---
+path: sharepoint-scraping-with-python-mechanize-and-beautiful-soup
+date: 2017-01-10T22:48:16.692Z
+title: 'Sharepoint Scraping with Python, Mechanize, and Beautiful Soup'
+description: >-
+  Over the Christmas break, I decided to write a SharePoint scraper in Python.
+  At work we have a SharePoint based wiki that is universally disliked and thus
+  is poorly used despite containing a lot of useful information. I've been
+  trialling Atlassian Confluence as a replacement and it seems a much better
+  solution.
+---
+Over the Christmas break, I decided to write a SharePoint scraper in Python.
+
+At work we have a SharePoint based wiki that is universally disliked and thus is poorly used despite containing a lot of useful information. I've been trialling Atlassian Confluence as a replacement and it seems a much better solution. However we don't want to run multiple wikis so I'll need to copy the existing data across.
+
+Gaining permission to use any APIs that SharePoint might expose over the Christmas break was obviously not going to happen, so I decided to use Python and Mechanize to scrape the wiki.
+
+## Problem 1 - Authentication
+
+After some quick research, I found our SharePoint instance doesn't accept basic authentication, but rather only uses the proprietary NTLM protocol.
+
+I found a Python module, python-ntlm, which provided an authentication handler for NTLM.
+
+Following some discussion on Stack Overflow here, I was able to hook the NTLM handler up to the Mechanize module.
+
+```python
+import mechanize
+from ntlm import HTTPNtlmAuthHandler
+
+passman = mechanize.HTTPPasswordMgrWithDefaultRealm()
+passman.add_password(None, url, user, password)
+# create the NTLM authentication handler
+auth_NTLM = HTTPNtlmAuthHandler.HTTPNtlmAuthHandler(passman)
+
+# create and install the opener
+browser = mechanize.Browser()
+browser.add_handler(auth_NTLM)
+browser.open(url)
+```
+
+I ran into a couple of hurdles with this approach.
+
+Firstly, Mechanize correctly follows the robots.txt. However, since this is a once off scrape off our own site, I was happy to bypass the robots.txt.
+
+```python
+browser.set_handle_robots(False)
+```
+
+Secondly, Mechanize seems to have a bug when using NTLM authentication. With a patch described here, I was able to get Mechanize up and running. A pull request is open on GitHub, however it hasn't been merged.
+
+## Problem 2 - Traversing and filtering the tree
+
+Since SharePoint HTML is, well ... not pretty, not to mention there's a bunch of site chrome we don't want to scrape, I needed to do some cleansing.
+
+I used the module Beautiful Soup to filter the tree and clean up the code.
+
+Beautiful Soup's tagline reads as follows:
+
+You didn't write that awful page. You're just trying to get some data out of it. Beautiful Soup is here to help.
+
+And that certainly fit my use case.
+
+I filtered to within a particular div (the obviously named ctl00_PlaceHolderMain_WikiField for those of you playing at home) that excluded all the extraneous SharePoint navigation stuff.
+
+Beautiful Soup can use a number of different parsers, depending on your usage.
+
+I started off using the default Python html.parser, however the SharePoint code was too dirty for it, and it fell down on a number of pages. So I changed to the much more permissive html5lib and found all of my pages scraped correctly.
+
+Once I'd filtered and scraped my pages, I had more or less well formed HTML of the page content only, which led to my final challenge.
+
+I then recursively iterated through each of the links parsing local SharePoint links.
+
+## Problem 3 - Converting to Markdown
+
+I decided early on that converting to Markdown would probably be a good idea. This would allow me to strip it back to basics, getting rid of the nasty font tags, inline styles, and other junk that had polluted the SharePoint pages.
+
+This proved to be a pretty easy task. I used the html2markdown module.
+
+I ran my newly well formed HTML through it and voila, Markdown!
+
+## Get the source
+Fork or clone the sharepoint-ripper on GitHub. Issues and pull requests welcome!
+
