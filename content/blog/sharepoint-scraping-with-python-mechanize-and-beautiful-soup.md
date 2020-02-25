@@ -15,35 +15,39 @@ At work we have a SharePoint based wiki that is universally disliked and thus is
 
 Gaining permission to use any APIs that SharePoint might expose over the Christmas break was obviously not going to happen, so I decided to use Python and Mechanize to scrape the wiki.
 
-###### Problem 1 - Authentication
+## Problem 1 - Authentication
 After some quick research, I found our SharePoint instance doesn't accept basic authentication, but rather only uses the proprietary NTLM protocol.
 
 I found a Python module, [python-ntlm](https://code.google.com/p/python-ntlm/), which provided an authentication handler for NTLM.
 
 Following some discussion on Stack Overflow [here](http://stackoverflow.com/a/6029776/269297), I was able to hook the NTLM handler up to the Mechanize module.
 
-    import mechanize
-    from ntlm import HTTPNtlmAuthHandler
+```python
+import mechanize
+from ntlm import HTTPNtlmAuthHandler
     
-    passman = mechanize.HTTPPasswordMgrWithDefaultRealm()
-    passman.add_password(None, url, user, password)
-    # create the NTLM authentication handler
-    auth_NTLM = HTTPNtlmAuthHandler.HTTPNtlmAuthHandler(passman)
+passman = mechanize.HTTPPasswordMgrWithDefaultRealm()
+passman.add_password(None, url, user, password)
+# create the NTLM authentication handler
+auth_NTLM = HTTPNtlmAuthHandler.HTTPNtlmAuthHandler(passman)
     
-    # create and install the opener
-    browser = mechanize.Browser()
-    browser.add_handler(auth_NTLM)
-    browser.open(url)
+# create and install the opener
+browser = mechanize.Browser()
+browser.add_handler(auth_NTLM)
+browser.open(url)
+```
     
 I ran into a couple of hurdles with this approach. 
 
 Firstly, Mechanize correctly follows the robots.txt. However, since this is a once off scrape off our own site, I was happy to [bypass the robots.txt](http://stackoverflow.com/questions/2846105/screen-scraping-getting-around-http-error-403-request-disallowed-by-robots-tx). 
 
-    browser.set_handle_robots(False)
+```python
+browser.set_handle_robots(False)
+```
     
 Secondly, Mechanize seems to have a bug when using NTLM authentication. With a patch described [here](http://stackoverflow.com/a/14726708/269297), I was able to get Mechanize up and running. A [pull request](https://github.com/jjlee/mechanize/issues/88) is open on GitHub, however it hasn't been merged.
 
-###### Problem 2 - Traversing and filtering the tree
+## Problem 2 - Traversing and filtering the tree
 Since SharePoint HTML is, well ... not pretty, not to mention there's a bunch of site chrome we don't want to scrape, I needed to do some cleansing. 
 
 I used the module [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/) to filter the tree and clean up the code.
@@ -64,14 +68,14 @@ Once I'd filtered and scraped my pages, I had more or less well formed HTML of t
 
 I then recursively iterated through each of the links parsing local SharePoint links.
 
-###### Problem 3 - Converting to Markdown
+## Problem 3 - Converting to Markdown
 I decided early on that converting to Markdown would probably be a good idea. This would allow me to strip it back to basics, getting rid of the nasty font tags, inline styles, and other junk that had polluted the SharePoint pages. 
 
 This proved to be a pretty easy task. I used the [html2markdown](https://github.com/aaronsw/html2text) module.
 
 I ran my newly well formed HTML through it and voila, Markdown!
 
-###### Get the source
+## Get the source
 
 Fork or clone the sharepoint-ripper on [GitHub](https://github.com/zorfling/sharepoint-ripper). Issues and pull requests welcome!
 
