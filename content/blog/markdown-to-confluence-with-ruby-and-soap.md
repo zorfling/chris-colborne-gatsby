@@ -23,6 +23,7 @@ So I forked the repo and added an option to provide a parent page to house the n
 I then used awk and xargs to iterate through the files importing under a page I'd created for the legacy wiki.
 
 ls output/ | awk '{ print "output/" $1 }' | xargs -I {} ./md2confl.rb -s SS -c http://myconfluence.net -t1671258 --markdownFile {}
+
 This imported my 300 legacy SharePoint pages into Confluence in a flash.
 
 However, there were some conversion issues, so this is still a work in progress.
@@ -33,5 +34,5 @@ In fact there is an outstanding issue regarding the nested list problem that I f
 
 All in all, this gets me almost to the point of being able to move across to Confluence. I hope it might help someone else in the same boat.
 
-## the sourc e
+## Get the source
 Fork or clone the markdown to confluence uploader on GitHub. Issues and pull requests welcome!
