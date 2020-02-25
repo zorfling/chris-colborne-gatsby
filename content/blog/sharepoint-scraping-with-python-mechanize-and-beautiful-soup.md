@@ -1,6 +1,6 @@
 ---
 path: sharepoint-scraping-with-python-mechanize-and-beautiful-soup
-date: 2017-01-10T22:48:16.692Z
+date: 2015-01-10T14:00:00.000Z
 title: 'Sharepoint Scraping with Python, Mechanize, and Beautiful Soup'
 description: >-
   Over the Christmas break, I decided to write a SharePoint scraper in Python.
