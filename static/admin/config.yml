@@ -11,6 +11,8 @@ collections:
     label: Blog
     folder: content/blog
     create: true
+    extension: mdx
+    format: frontmatter
     fields:
       - { name: path, label: Path }
       - { name: date, label: Date, widget: date }
