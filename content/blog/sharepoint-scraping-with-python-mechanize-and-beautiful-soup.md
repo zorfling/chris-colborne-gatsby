@@ -81,4 +81,4 @@ Fork or clone the sharepoint-ripper on [GitHub](https://github.com/zorfling/shar
 
 ---
 
-Stay tuned for my [next post](/markdown-to-confluence-with-ruby-and-soap/) where I import the exported Markdown into Confluence.
+Stay tuned for my [next post](/blog/markdown-to-confluence-with-ruby-and-soap/) where I import the exported Markdown into Confluence.
