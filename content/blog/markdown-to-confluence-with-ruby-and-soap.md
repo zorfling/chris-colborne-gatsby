@@ -24,7 +24,9 @@ So I [forked the repo](https://github.com/zorfling/markdown-to-confluence-upload
 
 I then used awk and xargs to iterate through the files importing under a page I'd created for the legacy wiki.
 
-    ls output/ | awk '{ print "output/" $1 }' | xargs -I {} ./md2confl.rb -s SS -c http://myconfluence.net -t1671258 --markdownFile {}
+```bash
+ls output/ | awk '{ print "output/" $1 }' | xargs -I {} ./md2confl.rb -s SS -c http://myconfluence.net -t1671258 --markdownFile {}
+```
 
 This imported my 300 legacy SharePoint pages into Confluence in a flash.
 
@@ -36,5 +38,5 @@ In fact there is an [outstanding issue](https://github.com/jedi4ever/markdown2co
 
 All in all, this gets me almost to the point of being able to move across to Confluence. I hope it might help someone else in the same boat.
 
-###### Get the source
+## Get the source
 Fork or clone the markdown to confluence uploader on [GitHub](https://github.com/zorfling/markdown-to-confluence-uploader). Issues and pull requests welcome!
