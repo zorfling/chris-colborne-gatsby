@@ -6,7 +6,7 @@ description: >-
   This post follows on from my previous post about the SharePoint to Markdown
   ripper.
 ---
-This post follows on from my previous post about the SharePoint to Markdown ripper. You can [go back and read it if you'd like](/sharepoint-scraping-with-python-mechanize-and-beautiful-soup/).
+This post follows on from my previous post about the SharePoint to Markdown ripper. You can [go back and read it if you'd like](/blog/sharepoint-scraping-with-python-mechanize-and-beautiful-soup/).
 
 ---
 
