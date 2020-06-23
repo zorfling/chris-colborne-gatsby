@@ -2,8 +2,8 @@ backend:
   name: github
   repo: zorfling/chris-colborne-gatsby
 
-media_folder: static/assets
-public_folder: assets
+media_folder: content/assets
+public_folder: ../assets
 publish_mode: editorial_workflow
 
 collections:
@@ -11,11 +11,12 @@ collections:
     label: Blog
     folder: content/blog
     create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     extension: mdx
     format: frontmatter
     fields:
       - { name: path, label: Path }
-      - { name: date, label: Date, widget: date }
+      - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
       - { name: description, label: Description }
       - { name: body, label: Body, widget: markdown }

@@ -1,12 +1,12 @@
 module.exports = {
   siteMetadata: {
     // edit below
-    title: `Chris Colborne`,
-    author: `Chris Colborne`,
-    description: `An Aussie software engineer, talking tech and more.`,
-    siteUrl: `https://chriscolborne.com/`,
+    title: 'Chris Colborne',
+    author: 'Chris Colborne',
+    description: 'An Aussie software engineer, talking tech and more.',
+    siteUrl: 'https://chriscolborne.com/',
     social: {
-      twitter: `zorfling`,
+      twitter: 'zorfling',
     },
   },
   plugins: [
@@ -34,7 +34,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        extensions: [".mdx", ".md"],
+        extensions: ['.mdx', '.md'],
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -50,6 +50,9 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-vscode`,
+            options: {
+              theme: 'Solarized Light', // Or install your favorite theme from GitHub
+            },
           },
           {
             resolve: `gatsby-remark-copy-linked-files`,
@@ -58,6 +61,7 @@ module.exports = {
             resolve: `gatsby-remark-smartypants`,
           },
         ],
+        plugins: [`gatsby-remark-images`],
       },
     },
     {
@@ -71,9 +75,10 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Chris Colborne`,
+        short_name: `Chris Colborne`,
         start_url: `/`,
-        background_color: `#bec3d2`,
-        theme_color: `#bec3d2`,
+        background_color: `#ffffff`,
+        theme_color: `#663399`,
         display: `minimal-ui`,
         // edit below
         icon: `content/assets/gatsby-icon.png`,
@@ -86,4 +91,4 @@ module.exports = {
       },
     },
   ],
-}
+};
