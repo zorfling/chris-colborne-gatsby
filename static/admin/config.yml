@@ -12,6 +12,9 @@ collections:
     folder: content/blog
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    path: '{{slug}}/index'
+    media_folder: ''
+    public_folder: ''
     extension: mdx
     format: frontmatter
     fields:
@@ -19,4 +22,5 @@ collections:
       - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
       - { name: description, label: Description }
+      - { label: 'Cover Image', name: 'featured-image', widget: 'image' }
       - { name: body, label: Body, widget: markdown }
