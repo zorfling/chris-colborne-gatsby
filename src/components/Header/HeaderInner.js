@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { rhythm, scale } from '../../utils/typography';
 
 const HeaderInner = ({ title }) => {
   return (
@@ -13,10 +12,9 @@ const HeaderInner = ({ title }) => {
       <Link
         style={{
           boxShadow: `none`,
-          textDecoration: `none`,
           color: `inherit`,
         }}
-        to="/"
+        to={`/`}
       >
         {title}
       </Link>

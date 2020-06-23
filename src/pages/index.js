@@ -1,28 +1,24 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 
+import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { rhythm } from '../utils/typography';
 
-const IndexPage = ({ data, location }) => {
+const BlogIndex = ({ data, location }) => {
+  const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMdx.edges;
 
   return (
-    <Layout location={location} title={data.site.siteMetadata.title}>
-      <SEO title="Home" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
-      <h2>An Aussie software engineer, talking tech and more.</h2>
-      <p>Welcome to your new Gatsby website. You are on your home page.</p>
-      <p>
-        This starter comes out of the box with styled components and Gatsby's
-        default starter blog running on Netlify CMS.
-      </p>
-      <p>Now go build something great!</p>
-      <div style={{ margin: '20px 0 40px' }}>
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug;
-          return (
-            <div key={node.fields.slug}>
+    <Layout location={location} title={siteTitle}>
+      <SEO title="All posts" />
+      <Bio />
+      {posts.map(({ node }) => {
+        const title = node.frontmatter.title || node.fields.slug;
+        return (
+          <article key={node.fields.slug}>
+            <header>
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),
@@ -33,22 +29,24 @@ const IndexPage = ({ data, location }) => {
                 </Link>
               </h3>
               <small>{node.frontmatter.date}</small>
+            </header>
+            <section>
               <p
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
                 }}
               />
-            </div>
-          );
-        })}
-      </div>
+            </section>
+          </article>
+        );
+      })}
     </Layout>
   );
 };
 
-export default IndexPage;
+export default BlogIndex;
 
-export const query = graphql`
+export const pageQuery = graphql`
   query {
     site {
       siteMetadata {

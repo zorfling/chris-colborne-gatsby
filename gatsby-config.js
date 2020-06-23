@@ -1,8 +1,10 @@
 module.exports = {
   siteMetadata: {
-    // edit below
     title: 'Chris Colborne',
-    author: 'Chris Colborne',
+    author: {
+      name: 'Chris Colborne',
+      summary: 'an Aussie web dev from Brisbane, Australia.',
+    },
     description: 'An Aussie software engineer, talking tech and more.',
     siteUrl: 'https://chriscolborne.com/',
     social: {
@@ -10,13 +12,6 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-netlify-cms`,
-    `gatsby-plugin-styled-components`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-offline`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-feed-mdx`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -64,13 +59,15 @@ module.exports = {
         plugins: [`gatsby-remark-images`],
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        // edit below
-        // trackingId: `ADD YOUR TRACKING ID HERE`,
+        //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
     },
+    `gatsby-plugin-feed-mdx`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -80,15 +77,18 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        // edit below
         icon: `content/assets/gatsby-icon.png`,
       },
     },
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-plugin-netlify-cms`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-offline`,
   ],
 };

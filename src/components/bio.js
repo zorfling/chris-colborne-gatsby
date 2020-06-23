@@ -1,16 +1,21 @@
 /**
  * Bio component that queries for data
- * with Gatsby's StaticQuery component
+ * with Gatsby's useStaticQuery component
  *
- * See: https://www.gatsbyjs.org/docs/static-query/
+ * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
 import React from 'react';
-import { StaticQuery, graphql, useStaticQuery } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
 
 import { rhythm } from '../utils/typography';
+
+const Container = styled.div`
+  display: flex;
+  margin-bottom: ${rhythm(2.5)};
+`;
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -24,7 +29,10 @@ const Bio = () => {
       }
       site {
         siteMetadata {
-          author
+          author {
+            name
+            summary
+          }
           social {
             twitter
           }
@@ -34,12 +42,11 @@ const Bio = () => {
   `);
 
   const { author, social } = data.site.siteMetadata;
-
   return (
     <Container>
       <Image
         fixed={data.avatar.childImageSharp.fixed}
-        alt={author}
+        alt={author.name}
         style={{
           marginRight: rhythm(1 / 2),
           marginBottom: 0,
@@ -51,8 +58,7 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author}</strong> an Aussie web dev from Brisbane,
-        Australia.
+        Written by <strong>{author.name}</strong> {author.summary}
         {` `}
         <a href={`https://twitter.com/${social.twitter}`}>
           Follow me on Twitter
@@ -61,9 +67,5 @@ const Bio = () => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-`;
 
 export default Bio;

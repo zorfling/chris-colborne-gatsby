@@ -14,10 +14,9 @@ const HeaderHome = ({ title }) => {
       <Link
         style={{
           boxShadow: `none`,
-          textDecoration: `none`,
           color: `inherit`,
         }}
-        to="/"
+        to={`/`}
       >
         {title}
       </Link>
