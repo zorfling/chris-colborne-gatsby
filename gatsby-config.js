@@ -46,7 +46,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-vscode`,
             options: {
-              theme: 'Solarized Light', // Or install your favorite theme from GitHub
+              theme: 'Solarized Dark', // Or install your favorite theme from GitHub
+              extensions: ['twig-language'], // From package.json: name
             },
           },
           {

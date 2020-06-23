@@ -1,0 +1,330 @@
+---
+path: git-and-mercurial-cheat-sheet
+date: 2015-02-01T12:23:44.167Z
+title: Git and Mercurial Cheat Sheet
+description: Inspired by the excellent (but very thorough) Mercurial to Git Rosetta stone, here is a bare bones, back to basics, KISS mapping between Hg and Git.
+---
+
+Our team supports a large number of applications, ranging from legacy apps in SVN, to more recent apps in Mercurial, to our latest projects in Git.
+
+Inspired by the excellent (but very thorough) [Mercurial to Git Rosetta stone](https://github.com/sympy/sympy/wiki/Git-hg-rosetta-stone), here is a bare bones, back to basics, KISS mapping between Hg and Git of the most common operations I use on a day to day basis.
+
+#### Init
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg init</code>
+      </td>
+      <td width="50%">
+        <code>git init</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Add Remote
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>edit paths in .hg/hgrc </code>
+      </td>
+      <td width="50%">
+        <code>
+          git remote add origin
+          git@github.com:&lt;username&gt;/&lt;repo-name&gt;.git
+        </code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Clone
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg clone &lt;url&gt;</code>
+      </td>
+      <td width="50%">
+        <code>git clone &lt;url&gt;</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Pull
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg pull -u</code>
+      </td>
+      <td width="50%">
+        <code>git pull</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Push
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg push</code>
+      </td>
+      <td width="50%">
+        <code>git push</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Diff
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg diff</code>
+      </td>
+      <td width="50%">
+        <code>git diff</code>
+        <br />
+        OR
+        <br />
+        <code>git diff HEAD</code> (to diff both staged and unstaged)
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg diff -r 20:21 ./src/filename</code>
+      </td>
+      <td width="50%">
+        <code>git diff &lt;hash&gt;..&lt;hash&gt; -- ./src/filename</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>... coming ...</code>
+      </td>
+      <td width="50%">
+        <code>git diff master...&lt;hash&gt;</code> (to diff RHS with common
+        ancestor)
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### See incoming/outgoing commits
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg in</code>
+      </td>
+      <td width="50%">
+        <code>git fetch && git log master..FETCH_HEAD</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg out</code>
+      </td>
+      <td width="50%">
+        <code>git fetch && git log FETCH_HEAD..master</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Commit
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg ci -m"Commit message"</code>
+      </td>
+      <td width="50%">
+        <code>git commit -am"Commit message"</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Interactively commit part of working copy
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg record</code>
+      </td>
+      <td width="50%">
+        <code>git add --patch && git commit</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Branches
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg branch &lt;branch-name&gt;</code>
+      </td>
+      <td width="50%">
+        <code>git checkout -b &lt;branch-name&gt;</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg up &lt;branch-name&gt;</code>
+      </td>
+      <td width="50%">
+        <code>git checkout &lt;branch-name&gt;</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg push --new-branch</code>
+      </td>
+      <td width="50%">
+        <code>git push origin &lt;branch-name&gt; -u</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg branches</code>
+      </td>
+      <td width="50%">
+        <code>git branch -a</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg commit --close-branch</code>
+      </td>
+      <td width="50%">
+        # delete local branch
+        <br />
+        <code>git branch -d &lt;branch-name&gt;</code>
+        <br />
+        then
+        <br /># delete remote branch (NB the colon)
+        <br />
+        <code>git push origin :&lt;branch-name&gt;</code> <br />
+        also
+        <br /># remove remote tracking branches that no longer exist
+        <br />
+        <code>git fetch -p</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        # show commits from branch
+        <br />
+        <code>hg log -b &lt;branch-name&gt;</code>
+      </td>
+      <td width="50%">
+        <code>git reflog show &lt;branch-name&gt;</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Merge
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg merge &lt;branch-name or commit number/hash&gt;</code>
+      </td>
+      <td width="50%">
+        <code>git merge &lt;branch-name or commit hash&gt;</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Shelve/stash
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg shelve</code>
+      </td>
+      <td width="50%">
+        <code>git stash</code>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%">
+        <code>hg unshelve</code>
+      </td>
+      <td width="50%">
+        <code>git stash pop</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Clear working copy
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg up -C</code>
+      </td>
+      <td width="50%">
+        <code>git checkout -f</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Rollback
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg rollback</code>
+      </td>
+      <td width="50%">
+        <code>git reset HEAD~</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Remove ignored files that are already committed
+
+<table>
+  <tbody>
+    <tr>
+      <td width="50%">
+        <code>hg forget "set:hgignore() and not ignored()"</code>
+      </td>
+      <td width="50%">
+        <code>
+          git ls-files --ignored --exclude-standard | xargs git rm --cached
+        </code>
+      </td>
+    </tr>
+  </tbody>
+</table>
