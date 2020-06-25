@@ -1,7 +1,11 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 
-const HeaderInner = ({ title }) => {
+interface Props {
+  title: string;
+}
+
+const HeaderInner: React.FC<Props> = ({ title }) => {
   return (
     <h3
       style={{

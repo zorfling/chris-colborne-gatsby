@@ -1,39 +1,41 @@
+import { Link, graphql, PageProps } from 'gatsby';
 import React from 'react';
-import { Link, graphql } from 'gatsby';
 
-import Bio from '../components/bio';
-import Layout from '../components/layout';
-import SEO from '../components/seo';
+import { BlogIndexQuery } from '../../graphql-types';
+import Bio from '../components/Bio';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 import { rhythm } from '../utils/typography';
 
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title;
+const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
+  const siteTitle = data.site?.siteMetadata?.title;
   const posts = data.allMdx.edges;
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
+      <SEO title="" />
       <Bio />
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug;
+      {posts.map(({ node }, idx) => {
+        const title = node.frontmatter?.title || node.fields?.slug;
+        const slug = node.fields?.slug || `${idx}`;
         return (
-          <article key={node.fields.slug}>
+          <article key={slug}>
             <header>
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <Link style={{ boxShadow: `none` }} to={slug}>
                   {title}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
+              <small>{node.frontmatter?.date}</small>
             </header>
             <section>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
+                  __html: node.frontmatter?.description || node.excerpt,
                 }}
               />
             </section>
@@ -47,7 +49,7 @@ const BlogIndex = ({ data, location }) => {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query {
+  query BlogIndex {
     site {
       siteMetadata {
         title

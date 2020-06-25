@@ -1,8 +1,12 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 import { rhythm, scale } from '../../utils/typography';
 
-const HeaderHome = ({ title }) => {
+interface Props {
+  title: string;
+}
+
+const HeaderHome: React.FC<Props> = ({ title }) => {
   return (
     <h1
       style={{

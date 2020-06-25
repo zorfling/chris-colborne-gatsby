@@ -1,0 +1,71 @@
+{
+  "extends": [
+    "react-app",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "prettier/@typescript-eslint",
+    "plugin:jest-dom/recommended"
+  ],
+  "plugins": ["import", "jest-dom"],
+  "ignorePatterns": ["graphql-types.ts"],
+  "rules": {
+    "arrow-body-style": "off",
+    "camelcase": ["error"],
+    "constructor-super": "error",
+    "curly": "error",
+    "default-case": "error",
+    "dot-notation": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "guard-for-in": "error",
+    "import/no-duplicates": "error",
+    "import/order": ["error", { "alphabetize": { "order": "asc" } }],
+    "no-bitwise": "error",
+    "no-caller": "error",
+    "no-console": [
+      "error",
+      { "allow": ["debug", "warn", "info", "time", "timeEnd", "trace"] }
+    ],
+    "no-debugger": "error",
+    "no-empty-functions": "off",
+    "no-empty": "off",
+    "no-eval": "error",
+    "no-fallthrough": "error",
+    "no-new-wrappers": "error",
+    "no-param-reassign": "error",
+    "no-redeclare": "error",
+    "no-restricted-imports": ["error", "rxjs/Rx"],
+    "no-shadow": "error",
+    "no-throw-literal": "error",
+    "no-undef-init": "error",
+    "no-unused-expressions": "error",
+    "no-unused-labels": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "radix": "error",
+    "react/jsx-boolean-value": ["error", "never"],
+    "react/jsx-key": "error",
+    "react/no-string-refs": "error",
+    "react/self-closing-comp": ["error", { "component": true, "html": true }],
+    "spaced-comment": ["error", "always", { "markers": ["/"] }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-inferrable-types": [
+          "error",
+          { "ignoreParameters": true, "ignoreProperties": true }
+        ],
+        "@typescript-eslint/no-misused-new": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/no-use-before-declare": "off",
+        "@typescript-eslint/prefer-function-type": "error",
+        "@typescript-eslint/unified-signatures": "error"
+      }
+    }
+  ]
+}
