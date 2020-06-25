@@ -17,6 +17,13 @@ const Container = styled.div`
   margin-bottom: ${rhythm(2.5)};
 `;
 
+const StyledImage = styled(Image)`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0px;
+  min-width: 50px;
+  border-radius: 100%;
+`;
+
 const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
@@ -44,15 +51,9 @@ const Bio = () => {
   const { author, social } = data.site.siteMetadata;
   return (
     <Container>
-      <Image
+      <StyledImage
         fixed={data.avatar.childImageSharp.fixed}
         alt={author.name}
-        style={{
-          marginRight: rhythm(1 / 2),
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
-        }}
         imgStyle={{
           borderRadius: `50%`,
         }}

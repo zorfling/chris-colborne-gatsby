@@ -1,11 +1,16 @@
 import { Link, graphql, PageProps } from 'gatsby';
 import React from 'react';
 
+import styled from 'styled-components';
 import { BlogIndexQuery } from '../../graphql-types';
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import { rhythm } from '../utils/typography';
+
+const PostTitle = styled.h3`
+  margin-bottom: ${rhythm(1 / 4)};
+`;
 
 const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
   const siteTitle = data.site?.siteMetadata?.title;
@@ -21,15 +26,9 @@ const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
         return (
           <article key={slug}>
             <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={slug}>
-                  {title}
-                </Link>
-              </h3>
+              <PostTitle>
+                <Link to={slug}>{title}</Link>
+              </PostTitle>
               <small>{node.frontmatter?.date}</small>
             </header>
             <section>

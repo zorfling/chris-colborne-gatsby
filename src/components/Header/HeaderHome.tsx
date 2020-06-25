@@ -1,30 +1,23 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import styled from 'styled-components';
 import { rhythm, scale } from '../../utils/typography';
 
 interface Props {
   title: string;
 }
 
+const Container = styled.h1`
+  ${{ ...scale(1.5) }};
+  margin-bottom: ${rhythm(1.5)};
+  margin-top: 0;
+`;
+
 const HeaderHome: React.FC<Props> = ({ title }) => {
   return (
-    <h1
-      style={{
-        ...scale(1.5),
-        marginBottom: rhythm(1.5),
-        marginTop: 0,
-      }}
-    >
-      <Link
-        style={{
-          boxShadow: `none`,
-          color: `inherit`,
-        }}
-        to={`/`}
-      >
-        {title}
-      </Link>
-    </h1>
+    <Container>
+      <Link to="/">{title}</Link>
+    </Container>
   );
 };
 
