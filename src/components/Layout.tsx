@@ -13,6 +13,10 @@ const Wrapper = styled.div`
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
 `;
 
+const Footer = styled.footer`
+  font-size: 0.75rem;
+`;
+
 interface Props extends PageRendererProps {
   title?: string | null;
   children?: React.ReactNode;
@@ -32,11 +36,7 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     <Wrapper>
       <header>{header}</header>
       <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
+      <Footer>Chris Colborne © {new Date().getFullYear()}</Footer>
     </Wrapper>
   );
 };

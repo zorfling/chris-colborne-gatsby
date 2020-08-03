@@ -14,7 +14,11 @@ import { rhythm } from '../utils/typography';
 
 const Container = styled.div`
   display: flex;
-  margin-bottom: ${rhythm(2.5)};
+  margin-bottom: ${rhythm(1)};
+
+  & p {
+    margin-bottom: 0;
+  }
 `;
 
 const StyledImage = styled(Image)`
@@ -59,7 +63,7 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author.name}</strong> {author.summary}
+        Written by <strong>{author.name}</strong>, {author.summary}
         {` `}
         <a href={`https://twitter.com/${social.twitter}`}>
           Follow me on Twitter

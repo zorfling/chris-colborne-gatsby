@@ -3611,6 +3611,11 @@ export type NotFoundQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type NotFoundQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
+export type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AboutPageQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
 export type BlogIndexQueryVariables = Exact<{ [key: string]: never; }>;
 
 
