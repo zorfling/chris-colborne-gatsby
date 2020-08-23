@@ -3,10 +3,10 @@ module.exports = {
     title: 'Chris Colborne',
     author: {
       name: 'Chris Colborne',
-      summary: 'an Aussie web dev from Brisbane, Australia.',
+      summary: 'an Aussie software engineer from Brisbane, Australia.',
     },
     description: 'An Aussie software engineer, talking tech and more.',
-    siteUrl: 'https://chriscolborne.com/',
+    siteUrl: 'https://chriscolborne.com',
     social: {
       twitter: 'zorfling',
     },
@@ -65,7 +65,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        // trackingId: `UA-1359868-4`,
+        trackingId: `UA-1359868-4`,
       },
     },
     `gatsby-plugin-feed-mdx`,
@@ -75,10 +75,10 @@ module.exports = {
         name: `Chris Colborne`,
         short_name: `Chris Colborne`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        background_color: `#bec3d2`,
+        theme_color: `#bec3d2`,
+        display: `standalone`,
+        icon: `content/assets/favicon.png`,
       },
     },
     `gatsby-plugin-react-helmet`,
