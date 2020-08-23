@@ -12,6 +12,11 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   margin-bottom: ${rhythm(1.5)};
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const Title = styled.h1`

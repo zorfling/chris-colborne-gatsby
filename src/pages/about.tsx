@@ -5,11 +5,19 @@ import styled from 'styled-components';
 import { AboutPageQuery } from '../../graphql-types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { rhythm, scale } from '../utils/typography';
+import { rhythm } from '../utils/typography';
 
 const Container = styled.div`
   display: flex;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+  @media (max-width: 415px) {
+    align-items: center;
+  }
 `;
+
 const Title = styled.h1`
   margin-top: ${rhythm(1)};
   margin-bottom: 0;
@@ -29,8 +37,13 @@ const Callout = styled.h2`
 `;
 
 const Photo = styled.img`
-  flex: 0 0 175px;
   margin-right: 3rem;
+  min-width: 175px;
+
+  @media (max-width: 700px) {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
 `;
 
 const age = new Date().getFullYear() - 2013;
