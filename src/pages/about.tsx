@@ -1,5 +1,6 @@
-import { Link, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps } from 'gatsby';
 import Image, { FixedObject } from 'gatsby-image';
+import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import React, { FC } from 'react';
 
 import styled from 'styled-components';
@@ -70,14 +71,22 @@ const AboutPage: FC<PageProps<AboutPageQuery>> = ({ data, location }) => {
         <Intro>
           <Callout>Hi, I'm Chris Colborne.</Callout>
           <p>
-            I'm a Web Developer from Brisbane, Australia. I specialise in
-            building custom web applications, primarily with JavaScript and PHP.
+            I'm a Web Developer from Brisbane, Australia{' '}
+            <span role="img" aria-label="Australian flag">
+              🇦🇺
+            </span>
+            . I specialise in building custom web applications, primarily with
+            JavaScript and PHP.
           </p>
         </Intro>
       </Container>
       <p>
         I'm also a father to a beautiful {age} year old daughter, and husband to
-        a crazy Hungarian 🇭🇺.
+        a crazy Hungarian{' '}
+        <span role="img" aria-label="Hungarian flag">
+          🇭🇺
+        </span>
+        .
       </p>
 
       <p>
@@ -85,11 +94,18 @@ const AboutPage: FC<PageProps<AboutPageQuery>> = ({ data, location }) => {
       </p>
       <p>
         You can find me on{' '}
-        <Link to="https://twitter.com/zorfling">Twitter</Link>,{' '}
-        <Link to="https://www.facebook.com/zorfling">Facebook</Link>,{' '}
-        <Link to="https://au.linkedin.com/in/chriscolborne">LinkedIn</Link> and{' '}
-        <Link to="https://github.com/zorfling">GitHub</Link>. Or feel free to
-        drop me an email at chris (at) chriscolborne.com.
+        <OutboundLink href="https://twitter.com/zorfling">Twitter</OutboundLink>
+        ,{' '}
+        <OutboundLink href="https://www.facebook.com/zorfling">
+          Facebook
+        </OutboundLink>
+        ,{' '}
+        <OutboundLink href="https://au.linkedin.com/in/chriscolborne">
+          LinkedIn
+        </OutboundLink>{' '}
+        and{' '}
+        <OutboundLink href="https://github.com/zorfling">GitHub</OutboundLink>.
+        Or feel free to drop me an email at chris (at) chriscolborne.com.
       </p>
     </Layout>
   );
