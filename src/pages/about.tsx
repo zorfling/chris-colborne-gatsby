@@ -26,10 +26,6 @@ const Title = styled.h1`
 
 const Intro = styled.div`
   margin-top: 1.75rem;
-
-  & p {
-    margin-bottom: 0;
-  }
 `;
 
 const Callout = styled.h2`
@@ -75,13 +71,13 @@ const AboutPage: FC<PageProps<AboutPageQuery>> = ({ data, location }) => {
           <Callout>Hi, I'm Chris Colborne.</Callout>
           <p>
             I'm a Web Developer from Brisbane, Australia. I specialise in
-            building custom web applications, primarily with PHP and JavaScript.
+            building custom web applications, primarily with JavaScript and PHP.
           </p>
         </Intro>
       </Container>
       <p>
         I'm also a father to a beautiful {age} year old daughter, and husband to
-        a crazy Hungarian.
+        a crazy Hungarian 🇭🇺.
       </p>
 
       <p>

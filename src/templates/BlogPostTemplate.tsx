@@ -58,19 +58,19 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         title={post?.frontmatter?.title || ''}
         description={post?.frontmatter?.description || post?.excerpt}
       />
-      {featuredImage && (
-        <>
-          <Img fluid={fluidObject} />
-          <small style={{ display: 'block', marginBottom: '1rem' }}>
-            {attribution}
-          </small>
-        </>
-      )}
       <article>
         <header>
           <Title>{post?.frontmatter?.title}</Title>
           <Date>{post?.frontmatter?.date}</Date>
         </header>
+        {featuredImage && (
+          <>
+            <Img fluid={fluidObject} />
+            <small style={{ display: 'block', marginBottom: '1rem' }}>
+              {attribution}
+            </small>
+          </>
+        )}
         <MDXRenderer>{post?.body || ''}</MDXRenderer>
         <Separator />
         <footer>
