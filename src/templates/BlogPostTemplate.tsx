@@ -55,7 +55,7 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
 
   const additionalMeta: MetaProps[] = [
     {
-      name: 'og:image',
+      property: 'og:image',
       content: `${data.site?.siteMetadata?.siteUrl}${fluidObject?.src}`,
     },
   ];
