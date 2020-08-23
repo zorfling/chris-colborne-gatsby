@@ -3075,6 +3075,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___extensions'
   | 'pluginCreator___pluginOptions___gatsbyRemarkPlugins'
   | 'pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve'
+  | 'pluginCreator___pluginOptions___trackingId'
   | 'pluginCreator___pluginOptions___short_name'
   | 'pluginCreator___pluginOptions___start_url'
   | 'pluginCreator___pluginOptions___background_color'
@@ -3300,6 +3301,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___gatsbyRemarkPlugins___options___disableBgImage'
   | 'pluginOptions___gatsbyRemarkPlugins___options___theme'
   | 'pluginOptions___gatsbyRemarkPlugins___options___extensions'
+  | 'pluginOptions___trackingId'
   | 'pluginOptions___short_name'
   | 'pluginOptions___start_url'
   | 'pluginOptions___background_color'
@@ -3430,6 +3432,7 @@ export type SitePluginPluginOptions = {
   name?: Maybe<Scalars['String']>;
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
   gatsbyRemarkPlugins?: Maybe<Array<Maybe<SitePluginPluginOptionsGatsbyRemarkPlugins>>>;
+  trackingId?: Maybe<Scalars['String']>;
   short_name?: Maybe<Scalars['String']>;
   start_url?: Maybe<Scalars['String']>;
   background_color?: Maybe<Scalars['String']>;
@@ -3451,6 +3454,7 @@ export type SitePluginPluginOptionsFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   extensions?: Maybe<StringQueryOperatorInput>;
   gatsbyRemarkPlugins?: Maybe<SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput>;
+  trackingId?: Maybe<StringQueryOperatorInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
   start_url?: Maybe<StringQueryOperatorInput>;
   background_color?: Maybe<StringQueryOperatorInput>;
@@ -3635,7 +3639,7 @@ export type BlogPostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type BlogPostBySlugQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, mdx?: Maybe<(
+export type BlogPostBySlugQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }>, mdx?: Maybe<(
     Pick<Mdx, 'id' | 'excerpt' | 'body'>
     & { frontmatter?: Maybe<(
       Pick<MdxFrontmatter, 'title' | 'date' | 'description' | 'attribution'>

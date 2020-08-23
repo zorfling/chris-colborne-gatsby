@@ -3,6 +3,7 @@ import Img, { FluidObject } from 'gatsby-image';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 
+import { MetaProps } from 'react-helmet';
 import styled from 'styled-components';
 import { BlogPostBySlugQuery } from '../../graphql-types';
 import Bio from '../components/Bio';
@@ -52,11 +53,19 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
       }
     : undefined;
 
+  const additionalMeta: MetaProps[] = [
+    {
+      name: 'og:image',
+      content: `${data.site?.siteMetadata?.siteUrl}${fluidObject?.src}`,
+    },
+  ];
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
         title={post?.frontmatter?.title || ''}
         description={post?.frontmatter?.description || post?.excerpt}
+        meta={additionalMeta}
       />
       <article>
         <header>
@@ -107,6 +116,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     mdx(fields: { slug: { eq: $slug } }) {
