@@ -6,7 +6,8 @@ module.exports = {
       summary: 'an Aussie software engineer from Brisbane, Australia.',
     },
     description: 'An Aussie software engineer, talking tech and more.',
-    siteUrl: 'https://chriscolborne.com',
+    siteUrl: 'https://chris-colborne-com.netlify.com',
+    '//siteUrl': 'https://chriscolborne.com',
     social: {
       twitter: 'zorfling',
     },
