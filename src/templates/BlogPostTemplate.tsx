@@ -1,4 +1,5 @@
 import { Link, graphql, PageProps } from 'gatsby';
+import Img, { FluidObject } from 'gatsby-image';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 
@@ -40,6 +41,16 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
   const post = data.mdx;
   const siteTitle = data.site?.siteMetadata?.title;
   const { previous, next } = pageContext as any;
+  const featuredImage = post?.frontmatter?.featuredImage;
+  const attribution = post?.frontmatter?.attribution;
+
+  const fluid = post?.frontmatter?.featuredImage?.childImageSharp?.fluid;
+  const fluidObject: FluidObject | undefined = fluid
+    ? {
+        ...fluid,
+        base64: fluid.base64 || undefined,
+      }
+    : undefined;
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -47,6 +58,14 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         title={post?.frontmatter?.title || ''}
         description={post?.frontmatter?.description || post?.excerpt}
       />
+      {featuredImage && (
+        <>
+          <Img fluid={fluidObject} />
+          <small style={{ display: 'block', marginBottom: '1rem' }}>
+            {attribution}
+          </small>
+        </>
+      )}
       <article>
         <header>
           <Title>{post?.frontmatter?.title}</Title>
@@ -98,6 +117,14 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        attribution
+        featuredImage {
+          childImageSharp {
+            fluid(maxWidth: 1000) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }

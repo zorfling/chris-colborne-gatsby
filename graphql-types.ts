@@ -3614,14 +3614,20 @@ export type NotFoundQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteM
 export type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AboutPageQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+export type AboutPageQuery = { site?: Maybe<{ siteMetadata?: Maybe<(
+      Pick<SiteSiteMetadata, 'title'>
+      & { author?: Maybe<Pick<SiteSiteMetadataAuthor, 'name'>> }
+    )> }>, avatar?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
 export type BlogIndexQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type BlogIndexQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, allMdx: { edges: Array<{ node: (
         Pick<Mdx, 'excerpt'>
-        & { fields?: Maybe<Pick<MdxFields, 'slug'>>, frontmatter?: Maybe<Pick<MdxFrontmatter, 'date' | 'title' | 'description'>> }
+        & { fields?: Maybe<Pick<MdxFields, 'slug'>>, frontmatter?: Maybe<(
+          Pick<MdxFrontmatter, 'date' | 'title' | 'description'>
+          & { featuredImage?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluidFragment> }> }> }
+        )> }
       ) }> } };
 
 export type BlogPostBySlugQueryVariables = Exact<{
@@ -3631,7 +3637,10 @@ export type BlogPostBySlugQueryVariables = Exact<{
 
 export type BlogPostBySlugQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, mdx?: Maybe<(
     Pick<Mdx, 'id' | 'excerpt' | 'body'>
-    & { frontmatter?: Maybe<Pick<MdxFrontmatter, 'title' | 'date' | 'description'>> }
+    & { frontmatter?: Maybe<(
+      Pick<MdxFrontmatter, 'title' | 'date' | 'description' | 'attribution'>
+      & { featuredImage?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluidFragment> }> }> }
+    )> }
   )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;

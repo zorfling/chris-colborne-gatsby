@@ -1,4 +1,5 @@
 import { Link, graphql, PageProps } from 'gatsby';
+import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 
 import styled from 'styled-components';
@@ -23,12 +24,25 @@ const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
       {posts.map(({ node }, idx) => {
         const title = node.frontmatter?.title || node.fields?.slug;
         const slug = node.fields?.slug || `${idx}`;
+
+        const fluid = node.frontmatter?.featuredImage?.childImageSharp?.fluid;
+        const fluidObject: FluidObject | undefined = fluid
+          ? {
+              ...fluid,
+              base64: fluid.base64 ?? undefined,
+            }
+          : undefined;
         return (
           <article key={slug}>
             <header>
               <PostTitle>
                 <Link to={slug}>{title}</Link>
               </PostTitle>
+              {fluid && (
+                <Link to={slug}>
+                  <Img fluid={fluidObject} />
+                </Link>
+              )}
               <small>{node.frontmatter?.date}</small>
             </header>
             <section>
@@ -65,6 +79,13 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 720) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
