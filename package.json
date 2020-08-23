@@ -29,6 +29,7 @@
     "gatsby-source-filesystem": "^2.3.11",
     "gatsby-transformer-remark": "^2.8.15",
     "gatsby-transformer-sharp": "^2.5.5",
+    "graphql-for-vscode": "github:kumarharsh/graphql-for-vscode",
     "netlify-cms-app": "^2.12.15",
     "prettier": "2.0.5",
     "react": "^16.12.0",

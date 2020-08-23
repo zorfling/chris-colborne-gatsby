@@ -374,7 +374,7 @@ Notice we can nest inside the query to return the username of each person's frie
 
 ##### Request
 
-```
+```graphql
 {
   allPeople {
     username
@@ -389,7 +389,7 @@ Notice we can nest inside the query to return the username of each person's frie
 
 ##### Response
 
-```
+```json
 {
   "data": {
     "allPeople": [
@@ -443,9 +443,9 @@ Get the username of user id 1, along with the username, first name, last name an
 
 ##### Request
 
-```
+```graphql
 {
-  person (id: 1) {
+  person(id: 1) {
     username
     friends {
       username
@@ -459,7 +459,7 @@ Get the username of user id 1, along with the username, first name, last name an
 
 ##### Response
 
-```
+```json
 {
   "data": {
     "person": {

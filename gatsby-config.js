@@ -47,7 +47,7 @@ module.exports = {
             resolve: `gatsby-remark-vscode`,
             options: {
               theme: 'Solarized Dark', // Or install your favorite theme from GitHub
-              extensions: ['twig-language'], // From package.json: name
+              extensions: ['twig-language', 'graphql-for-vscode'], // From package.json: name
             },
           },
           {
@@ -65,7 +65,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        // trackingId: `ADD YOUR TRACKING ID HERE`,
+        // trackingId: `UA-1359868-4`,
       },
     },
     `gatsby-plugin-feed-mdx`,
