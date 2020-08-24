@@ -23,6 +23,6 @@ collections:
       - { name: date, label: Date, widget: datetime }
       - { name: attribution, label: Attribution }
       - { name: description, label: Description }
-      - { name: status, label: Status, widget: 'select', options: ['DRAFT', 'PUBLISHED']
+      - { name: status, label: Status, widget: 'select', options: ['DRAFT', 'PUBLISHED'] }
       - { name: featuredImage, label: 'Featured Image', widget: 'image' }
       - { name: body, label: Body, widget: markdown }
