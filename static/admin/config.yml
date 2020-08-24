@@ -18,9 +18,11 @@ collections:
     extension: mdx
     format: frontmatter
     fields:
+      - { name: title, label: Title }
       - { name: path, label: Path }
       - { name: date, label: Date, widget: datetime }
-      - { name: title, label: Title }
+      - { name: attribution, label: Attribution }
       - { name: description, label: Description }
+      - { name: status, label: Status, widget: 'select', options: ['DRAFT', 'PUBLISHED']
       - { name: featuredImage, label: 'Featured Image', widget: 'image' }
       - { name: body, label: Body, widget: markdown }
