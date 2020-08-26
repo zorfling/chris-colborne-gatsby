@@ -695,7 +695,6 @@ export type FileFieldsEnum =
   | 'childMdx___rawBody'
   | 'childMdx___fileAbsolutePath'
   | 'childMdx___frontmatter___title'
-  | 'childMdx___frontmatter___ad'
   | 'childMdx___frontmatter___path'
   | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___attribution'
@@ -737,6 +736,7 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___featuredImage___publicURL'
   | 'childMdx___frontmatter___featuredImage___id'
   | 'childMdx___frontmatter___featuredImage___children'
+  | 'childMdx___frontmatter___ad'
   | 'childMdx___body'
   | 'childMdx___excerpt'
   | 'childMdx___headings'
@@ -1821,7 +1821,6 @@ export type MdxFieldsEnum =
   | 'rawBody'
   | 'fileAbsolutePath'
   | 'frontmatter___title'
-  | 'frontmatter___ad'
   | 'frontmatter___path'
   | 'frontmatter___date'
   | 'frontmatter___attribution'
@@ -1889,6 +1888,7 @@ export type MdxFieldsEnum =
   | 'frontmatter___featuredImage___childMdx___id'
   | 'frontmatter___featuredImage___childMdx___children'
   | 'frontmatter___featuredImage___childMdx___childrenGrvscCodeBlock'
+  | 'frontmatter___ad'
   | 'body'
   | 'excerpt'
   | 'headings'
@@ -2080,13 +2080,13 @@ export type MdxFilterInput = {
 
 export type MdxFrontmatter = {
   title: Scalars['String'];
-  ad?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
   attribution?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   featuredImage?: Maybe<File>;
+  ad?: Maybe<Scalars['String']>;
 };
 
 
@@ -2099,13 +2099,13 @@ export type MdxFrontmatterDateArgs = {
 
 export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
-  ad?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
   attribution?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   status?: Maybe<StringQueryOperatorInput>;
   featuredImage?: Maybe<FileFilterInput>;
+  ad?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxGroupConnection = {

@@ -92,7 +92,7 @@ module.exports = {
                   date: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ 'content:encoded': edge.node.body }],
+                  custom_elements: [{ 'content:encoded': edge.node.html }],
                 });
               });
             },
@@ -102,7 +102,7 @@ module.exports = {
                   edges {
                     node {
                       excerpt
-                      body
+                      html
                       fields { slug }
                       frontmatter {
                         title
