@@ -34,6 +34,17 @@ const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
           : undefined;
         return (
           <article key={slug}>
+            {idx > 0 ? (
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <hr
+                  style={{
+                    width: '25%',
+                    marginBottom: '0',
+                    marginTop: '1.5rem',
+                  }}
+                />
+              </div>
+            ) : null}
             <header>
               <PostTitle>
                 <Link to={slug}>{title}</Link>
@@ -52,15 +63,6 @@ const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
                 }}
               />
             </section>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <hr
-                style={{
-                  width: '25%',
-                  marginBottom: '0',
-                  marginTop: '1.5rem',
-                }}
-              />
-            </div>
           </article>
         );
       })}

@@ -695,9 +695,12 @@ export type FileFieldsEnum =
   | 'childMdx___rawBody'
   | 'childMdx___fileAbsolutePath'
   | 'childMdx___frontmatter___title'
+  | 'childMdx___frontmatter___ad'
   | 'childMdx___frontmatter___path'
   | 'childMdx___frontmatter___date'
+  | 'childMdx___frontmatter___attribution'
   | 'childMdx___frontmatter___description'
+  | 'childMdx___frontmatter___status'
   | 'childMdx___frontmatter___featuredImage___sourceInstanceName'
   | 'childMdx___frontmatter___featuredImage___absolutePath'
   | 'childMdx___frontmatter___featuredImage___relativePath'
@@ -734,9 +737,6 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___featuredImage___publicURL'
   | 'childMdx___frontmatter___featuredImage___id'
   | 'childMdx___frontmatter___featuredImage___children'
-  | 'childMdx___frontmatter___status'
-  | 'childMdx___frontmatter___ad'
-  | 'childMdx___frontmatter___attribution'
   | 'childMdx___body'
   | 'childMdx___excerpt'
   | 'childMdx___headings'
@@ -1821,9 +1821,12 @@ export type MdxFieldsEnum =
   | 'rawBody'
   | 'fileAbsolutePath'
   | 'frontmatter___title'
+  | 'frontmatter___ad'
   | 'frontmatter___path'
   | 'frontmatter___date'
+  | 'frontmatter___attribution'
   | 'frontmatter___description'
+  | 'frontmatter___status'
   | 'frontmatter___featuredImage___sourceInstanceName'
   | 'frontmatter___featuredImage___absolutePath'
   | 'frontmatter___featuredImage___relativePath'
@@ -1886,9 +1889,6 @@ export type MdxFieldsEnum =
   | 'frontmatter___featuredImage___childMdx___id'
   | 'frontmatter___featuredImage___childMdx___children'
   | 'frontmatter___featuredImage___childMdx___childrenGrvscCodeBlock'
-  | 'frontmatter___status'
-  | 'frontmatter___ad'
-  | 'frontmatter___attribution'
   | 'body'
   | 'excerpt'
   | 'headings'
@@ -2080,13 +2080,13 @@ export type MdxFilterInput = {
 
 export type MdxFrontmatter = {
   title: Scalars['String'];
+  ad?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
-  description?: Maybe<Scalars['String']>;
-  featuredImage?: Maybe<File>;
-  status?: Maybe<Scalars['String']>;
-  ad?: Maybe<Scalars['String']>;
   attribution?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  featuredImage?: Maybe<File>;
 };
 
 
@@ -2099,13 +2099,13 @@ export type MdxFrontmatterDateArgs = {
 
 export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
+  ad?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
-  description?: Maybe<StringQueryOperatorInput>;
-  featuredImage?: Maybe<FileFilterInput>;
-  status?: Maybe<StringQueryOperatorInput>;
-  ad?: Maybe<StringQueryOperatorInput>;
   attribution?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  status?: Maybe<StringQueryOperatorInput>;
+  featuredImage?: Maybe<FileFilterInput>;
 };
 
 export type MdxGroupConnection = {
