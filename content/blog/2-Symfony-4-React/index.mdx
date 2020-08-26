@@ -3,7 +3,7 @@ title: React starter repo with Symfony 4 and Webpack Encore
 date: '2018-01-14T23:17:32.169Z'
 path: '/react-symfony-4-starter-repo/'
 featuredImage: './final-result.png'
-status: 'PUBLISHED'
+status: 'DRAFT'
 ad: 'react'
 ---
 
@@ -147,7 +147,7 @@ class App extends React.Component {
     super();
 
     this.state = {
-      entries: []
+      entries: [],
     };
   }
 
@@ -156,7 +156,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(entries => {
         this.setState({
-          entries
+          entries,
         });
       });
   }

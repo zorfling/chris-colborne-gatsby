@@ -19,6 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               frontmatter {
                 title
+                status
               }
             }
           }
@@ -35,8 +36,23 @@ exports.createPages = async ({ graphql, actions }) => {
   const posts = result.data.allMdx.edges;
 
   posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-    const next = index === 0 ? null : posts[index - 1].node;
+    let previous = null;
+    let next = null;
+    let checkIndex = index - 1;
+    while (checkIndex >= 0 && previous === null) {
+      if (posts[checkIndex].node.frontmatter.status !== 'DRAFT') {
+        previous = posts[checkIndex].node;
+      }
+      checkIndex--;
+    }
+
+    checkIndex = index + 1;
+    while (checkIndex < posts.length && next === null) {
+      if (posts[checkIndex].node.frontmatter.status !== 'DRAFT') {
+        next = posts[checkIndex].node;
+      }
+      checkIndex++;
+    }
 
     createPage({
       path: post.node.fields.slug,

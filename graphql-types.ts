@@ -734,9 +734,9 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___featuredImage___publicURL'
   | 'childMdx___frontmatter___featuredImage___id'
   | 'childMdx___frontmatter___featuredImage___children'
-  | 'childMdx___frontmatter___attribution'
   | 'childMdx___frontmatter___status'
   | 'childMdx___frontmatter___ad'
+  | 'childMdx___frontmatter___attribution'
   | 'childMdx___body'
   | 'childMdx___excerpt'
   | 'childMdx___headings'
@@ -1886,9 +1886,9 @@ export type MdxFieldsEnum =
   | 'frontmatter___featuredImage___childMdx___id'
   | 'frontmatter___featuredImage___childMdx___children'
   | 'frontmatter___featuredImage___childMdx___childrenGrvscCodeBlock'
-  | 'frontmatter___attribution'
   | 'frontmatter___status'
   | 'frontmatter___ad'
+  | 'frontmatter___attribution'
   | 'body'
   | 'excerpt'
   | 'headings'
@@ -2084,9 +2084,9 @@ export type MdxFrontmatter = {
   date?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   featuredImage?: Maybe<File>;
-  attribution?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   ad?: Maybe<Scalars['String']>;
+  attribution?: Maybe<Scalars['String']>;
 };
 
 
@@ -2103,9 +2103,9 @@ export type MdxFrontmatterFilterInput = {
   date?: Maybe<DateQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   featuredImage?: Maybe<FileFilterInput>;
-  attribution?: Maybe<StringQueryOperatorInput>;
   status?: Maybe<StringQueryOperatorInput>;
   ad?: Maybe<StringQueryOperatorInput>;
+  attribution?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxGroupConnection = {
@@ -2702,6 +2702,7 @@ export type SiteFieldsEnum =
   | 'siteMetadata___author___summary'
   | 'siteMetadata___description'
   | 'siteMetadata___siteUrl'
+  | 'siteMetadata____xsiteUrl'
   | 'siteMetadata___social___twitter'
   | 'port'
   | 'host'
@@ -2886,10 +2887,12 @@ export type SitePageContextNextFilterInput = {
 
 export type SitePageContextNextFrontmatter = {
   title?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextNextFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
+  status?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextPrevious = {
@@ -2912,10 +2915,12 @@ export type SitePageContextPreviousFilterInput = {
 
 export type SitePageContextPreviousFrontmatter = {
   title?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextPreviousFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
+  status?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -3020,8 +3025,10 @@ export type SitePageFieldsEnum =
   | 'context___slug'
   | 'context___previous___fields___slug'
   | 'context___previous___frontmatter___title'
+  | 'context___previous___frontmatter___status'
   | 'context___next___fields___slug'
   | 'context___next___frontmatter___title'
+  | 'context___next___frontmatter___status'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'
@@ -3580,6 +3587,7 @@ export type SiteSiteMetadata = {
   author?: Maybe<SiteSiteMetadataAuthor>;
   description?: Maybe<Scalars['String']>;
   siteUrl?: Maybe<Scalars['String']>;
+  _xsiteUrl?: Maybe<Scalars['String']>;
   social?: Maybe<SiteSiteMetadataSocial>;
 };
 
@@ -3598,6 +3606,7 @@ export type SiteSiteMetadataFilterInput = {
   author?: Maybe<SiteSiteMetadataAuthorFilterInput>;
   description?: Maybe<StringQueryOperatorInput>;
   siteUrl?: Maybe<StringQueryOperatorInput>;
+  _xsiteUrl?: Maybe<StringQueryOperatorInput>;
   social?: Maybe<SiteSiteMetadataSocialFilterInput>;
 };
 
