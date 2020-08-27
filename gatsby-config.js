@@ -142,5 +142,25 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
     'gatsby-plugin-graphql-codegen',
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allSitePage(filter: {context: {status: {ne: "DRAFT"}}, path: {regex: "/^(?!/(dev-404-page|404|offline-plugin-app-shell-fallback)).*$/"}}) {
+            edges {
+              node {
+                path
+              }
+            }
+          }
+        }`,
+      },
+    },
   ],
 };
