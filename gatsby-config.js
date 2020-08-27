@@ -98,7 +98,7 @@ module.exports = {
             },
             query: `
               {
-                allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+                allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {status: {ne: "DRAFT"}}}) {
                   edges {
                     node {
                       excerpt
