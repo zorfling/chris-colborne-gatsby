@@ -6,7 +6,7 @@ module.exports = {
       summary: 'an Aussie software engineer from Brisbane, Australia.',
     },
     description: 'An Aussie software engineer, talking tech and more.',
-    siteUrl: 'https://chris-colborne-com.netlify.com',
+    siteUrl: 'https://chris-colborne-com.netlify.app',
     '//siteUrl': 'https://chriscolborne.com',
     social: {
       twitter: 'zorfling',
@@ -142,6 +142,12 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
     'gatsby-plugin-graphql-codegen',
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: 'GTM-PSM2894',
+      },
+    },
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
