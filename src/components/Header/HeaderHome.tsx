@@ -43,7 +43,7 @@ const HeaderHome: React.FC<Props> = ({ title }) => {
         <Link to="/">{title}</Link>
       </Title>
       <Nav>
-        <Link to="/about">About Me</Link>
+        <Link to="/about-me">About Me</Link>
         <a target="_blank" href="/rss.xml">
           Subscribe
         </a>
