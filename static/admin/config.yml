@@ -16,6 +16,13 @@ collections:
     media_folder: ''
     public_folder: ''
     extension: mdx
+    view_filters:
+      - label: Drafts
+        field: status
+        pattern: DRAFT
+      - label: Published
+        field: status
+        pattern: PUBLISHED
     format: frontmatter
     fields:
       - { name: title, label: Title }
