@@ -20,9 +20,21 @@ collections:
     fields:
       - { name: title, label: Title }
       - { name: path, label: Path }
-      - { name: date, label: Date, widget: datetime }
+      - {
+          name: date,
+          label: Date,
+          widget: datetime,
+          dateFormat: YYYY-MM-DD,
+          timeFormat: false,
+          pickerUtc: true,
+        }
       - { name: attribution, label: Attribution }
       - { name: description, label: Description }
-      - { name: status, label: Status, widget: 'select', options: ['DRAFT', 'PUBLISHED'] }
+      - {
+          name: status,
+          label: Status,
+          widget: 'select',
+          options: ['DRAFT', 'PUBLISHED'],
+        }
       - { name: featuredImage, label: 'Featured Image', widget: 'image' }
       - { name: body, label: Body, widget: markdown }
