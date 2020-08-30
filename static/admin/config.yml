@@ -1,6 +1,7 @@
 backend:
   name: github
   repo: zorfling/chris-colborne-gatsby
+  branch: testing
 
 media_folder: content/assets
 public_folder: ../assets
