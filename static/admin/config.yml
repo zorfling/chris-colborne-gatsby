@@ -23,6 +23,7 @@ collections:
       - label: Published
         field: status
         pattern: PUBLISHED
+    summary: '({{year}}-{{month}}-{{day}}) - {{commit_date}} - {{title}}  - {{status}}'
     format: frontmatter
     fields:
       - { name: title, label: Title }

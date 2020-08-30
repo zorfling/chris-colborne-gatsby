@@ -736,7 +736,6 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___featuredImage___publicURL'
   | 'childMdx___frontmatter___featuredImage___id'
   | 'childMdx___frontmatter___featuredImage___children'
-  | 'childMdx___frontmatter___ad'
   | 'childMdx___body'
   | 'childMdx___excerpt'
   | 'childMdx___headings'
@@ -1888,7 +1887,6 @@ export type MdxFieldsEnum =
   | 'frontmatter___featuredImage___childMdx___id'
   | 'frontmatter___featuredImage___childMdx___children'
   | 'frontmatter___featuredImage___childMdx___childrenGrvscCodeBlock'
-  | 'frontmatter___ad'
   | 'body'
   | 'excerpt'
   | 'headings'
@@ -2086,7 +2084,6 @@ export type MdxFrontmatter = {
   description?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   featuredImage?: Maybe<File>;
-  ad?: Maybe<Scalars['String']>;
 };
 
 
@@ -2105,7 +2102,6 @@ export type MdxFrontmatterFilterInput = {
   description?: Maybe<StringQueryOperatorInput>;
   status?: Maybe<StringQueryOperatorInput>;
   featuredImage?: Maybe<FileFilterInput>;
-  ad?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxGroupConnection = {
@@ -3113,6 +3109,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___packageJson___description'
   | 'pluginCreator___packageJson___version'
   | 'pluginCreator___packageJson___main'
+  | 'pluginCreator___packageJson___author'
   | 'pluginCreator___packageJson___license'
   | 'pluginCreator___packageJson___dependencies'
   | 'pluginCreator___packageJson___dependencies___name'
@@ -3345,6 +3342,7 @@ export type SitePluginFieldsEnum =
   | 'packageJson___description'
   | 'packageJson___version'
   | 'packageJson___main'
+  | 'packageJson___author'
   | 'packageJson___license'
   | 'packageJson___dependencies'
   | 'packageJson___dependencies___name'
@@ -3387,6 +3385,7 @@ export type SitePluginPackageJson = {
   description?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
   main?: Maybe<Scalars['String']>;
+  author?: Maybe<Scalars['String']>;
   license?: Maybe<Scalars['String']>;
   dependencies?: Maybe<Array<Maybe<SitePluginPackageJsonDependencies>>>;
   devDependencies?: Maybe<Array<Maybe<SitePluginPackageJsonDevDependencies>>>;
@@ -3427,6 +3426,7 @@ export type SitePluginPackageJsonFilterInput = {
   description?: Maybe<StringQueryOperatorInput>;
   version?: Maybe<StringQueryOperatorInput>;
   main?: Maybe<StringQueryOperatorInput>;
+  author?: Maybe<StringQueryOperatorInput>;
   license?: Maybe<StringQueryOperatorInput>;
   dependencies?: Maybe<SitePluginPackageJsonDependenciesFilterListInput>;
   devDependencies?: Maybe<SitePluginPackageJsonDevDependenciesFilterListInput>;
