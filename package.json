@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "author": "Chris Colborne <chris@chriscolborne.com>",
   "dependencies": {
+    "@datadog/browser-rum": "^1.18.0",
     "@mdx-js/mdx": "^1.6.6",
     "@mdx-js/react": "^1.6.6",
     "babel-plugin-styled-components": "^1.10.7",
