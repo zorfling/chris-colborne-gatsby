@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { BlogPostBySlugQuery } from '../../graphql-types';
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
+import MailingSignup from '../components/MailingSignup';
 import SEO from '../components/SEO';
 import { rhythm, scale } from '../utils/typography';
 
@@ -83,6 +84,7 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         <MDXRenderer>{post?.body || ''}</MDXRenderer>
         <Separator />
         <footer>
+          <MailingSignup />
           <Bio />
         </footer>
       </article>
