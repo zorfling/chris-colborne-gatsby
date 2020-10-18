@@ -17,7 +17,7 @@ const MailingSignup = () => (
       }}
     >
       <form
-        action="https://modernjsforphpdevs.us17.list-manage.com/subscribe/post?u=a66a488dd0b8de9413165b734&amp;id=db699090c0"
+        action="https://chriscolborne.us17.list-manage.com/subscribe/post?u=a66a488dd0b8de9413165b734&amp;id=db699090c0"
         method="post"
         id="mc-embedded-subscribe-form"
         name="mc-embedded-subscribe-form"
