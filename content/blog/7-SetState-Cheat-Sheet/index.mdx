@@ -1,13 +1,14 @@
 ---
+ad: react
 title: Is it ever OK to set state directly? A setState cheat sheet
-date: '2020-02-04T08:30:00.000Z'
-path: '/setstate-cheat-sheet/'
-featuredImage: './featured-image.jpg'
-attribution: 'Photo by Robert Ruggiero on Unsplash'
-status: 'PUBLISHED'
-ad: 'react'
+path: /setstate-cheat-sheet/
+date: 2020-02-04T08:30:00.000Z
+attribution: Photo by Robert Ruggiero on Unsplash
+description: One of the parts of React that trips people up is understanding
+  state and how to update it.
+status: PUBLISHED
+featuredImage: ./featured-image.jpg
 ---
-
 One of the parts of React that trips people up is understanding state and how to update it. A lot of this confusion comes from the fact that setState is asynchronous.
 
 As they write in the [React docs](https://reactjs.org/docs/react-component.html#setstate):
@@ -50,10 +51,10 @@ Here's a quick rule of thumb.
 
 For example:
 
-- updating a count (updater function)
-- updating an object (updater function)
-- toggling a boolean (updater function)
-- setting a new string value (stateChange object)
+* updating a count (updater function)
+* updating an object (updater function)
+* toggling a boolean (updater function)
+* setting a new string value (stateChange object)
 
 ## What about hooks and useState?
 
@@ -79,7 +80,7 @@ this.setState(prevState => {
 
 // useState hook
 const [count, setCount] = useState(0);
-setCount(prevCount => count + 1);
+setCount(prevCount => prevCount + 1);
 ```
 
 ### Updating an object
