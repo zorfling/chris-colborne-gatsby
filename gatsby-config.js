@@ -167,5 +167,20 @@ module.exports = {
         }`,
       },
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Open Sans`,
+            variants: [`700`],
+          },
+          {
+            family: `Merriweather`,
+            variants: [`300`, `300i`, `700`, `700i`],
+          },
+        ],
+      },
+    },
   ],
 };
