@@ -1,0 +1,156 @@
+---
+title: What Is This Syntax {x, Y=something()} = {}
+path: object-destructuring
+date: 2020-11-07T14:07:17.645Z
+attribution: Illustration from unDraw
+description: Learn to destructure objects so you can read crazy code
+status: PUBLISHED
+featuredImage: undraw_processing_qj6a.png
+---
+You're getting used to React, you've got components and arrow functions and maps down, then you run into this beast.
+
+```js
+function doRender (
+  ui,
+  {
+    initialState,
+    store = configureStore({
+      reducer,
+      middleware: getMiddleware(),
+    })
+  } = {}
+) { // ... }
+```
+
+Wait, what, how? This little snippet breaks your brain. What was this developer thinking, were they just being too clever, or what?!
+
+Though it certainly is bracket soup, there is method in the madness. This is just a few different permutations of object destructuring layered on top of each other, inside a function call. So let's break it down bit by bit so you can read it.
+
+## Basic Destructuring
+
+First up, lets start with the basics. Object destructuring is just a way of extracting certain keys directly from an object. It's used quite heavily in React and other modern JavaScript frameworks. You already probably use it. It looks like this in it's basic form.
+
+```js
+const myObject = {
+  name: 'Chris',
+  email: 'chris@example.com',
+  city: 'Brisbane'
+};
+
+const { city } = myObject; // extracts 'Brisbane' and assigns it to a variable `city`
+```
+
+Easy right? Let's keep going.
+
+## Renaming Destructuring
+
+So next level, what if we already had a variable `city`? Let's rename it as we extract it:
+
+```js
+const myObject = {
+  name: 'Chris',
+  email: 'chris@example.com',
+  city: 'Brisbane'
+};
+
+const city = 'Sydney'; // oops we already have city in scope
+const { city: myCity } = myObject; // extracts 'Brisbane' and assigns it to a variable `myCity`
+```
+
+Two from two, got it.
+
+## Multi Level Destructuring
+
+Next up let's tackle multi level destructuring. That's when the variable you want to destructure is actually nested inside another key. Let's try and get at `city` and `state` in this nested object.
+
+```js
+const myObject = {
+  name: 'Chris',
+  email: 'chris@example.com',
+  address: {
+    city: 'Brisbane',
+    state: 'QLD'
+  }
+};
+
+const {
+  address: { city, state }
+} = myObject; // now city variable is 'Brisbane' and state variable is 'QLD'
+```
+
+Notice a trick here - address isn't actually destructured, it's just used to get at it's children. If you wanted the full address as well, you could either destructure address first here, then destructure it again, or do a double destructure.
+
+```js
+// destructure first then again
+const { address } = myObject;
+const { city } = address;
+
+// double destructure
+const {
+  address,
+  address: { city }
+} = myObject;
+```
+
+Great, we're starting to look like that initial snippet.
+
+## Destructuring Defaults
+
+Next level is destructuring defaults. Up until now we've been assuming the data is there. But what happens if that key _might_ be there, _might_ not? That's where defaults come into play.
+
+```js
+const myObject = {
+  name: 'Chris',
+  email: 'chris@example.com'
+  // city is missing for this one
+};
+
+const { city } = myObject; // `city` in this case will be `undefined`
+
+// let's add a default
+const { city1 = 'Sydney' } = myObject; // now `city1` will be 'Sydney' since it's not set
+
+const myObject2 = {
+  city: 'Brisbane'
+};
+const { city2 = 'Sydney' } = myObject2; // but `city2` here will be 'Brisbane' since it was set
+```
+
+When we try to do multi level destructuring, that's where we might run into problems however. Take this example, we try and get the `city` from the `address` but there is no `address`.
+
+```js
+const myObject = {
+  name: 'Chris',
+  email: 'chris@example.com'
+  // sometimes we have address, but not this time
+  // address: {
+  //   city: 'Brisbane',
+  // }
+};
+
+const {
+  address: { city }
+} = myObject; // bah bow - cannot read property 'city' of undefined
+
+// so let's fix that with a default
+const { address: { city } = {} } = myObject; // hooray, now we're looking for city on an empty default object, which won't fail
+```
+
+## Full Circle
+
+So now we're back to our original brain breaker. We can see now that all we've got is some multi level destructuring with defaults. Still not convinced? Ok we'll step through it bit by bit to make sure it sinks in:
+
+```js
+function doRender (                 // function call
+  ui,                               // first parameter called `ui`
+  {                                 // destructure the second parameter
+    initialState,                   // extract `initialState` to a variable
+    store = configureStore({        // extract `store` to a variable, and if it's unset, default to the result of configureStore()
+      reducer,                      // configureStore takes as argument an object with key `reducer` (which has the value of the variable `reducer`)
+      middleware: getMiddleware(),  // and a key `middleware` with the value returned from `getMiddleware()`
+    })
+  } = {}                            // default the second parameter to empty object, as it is optional
+) { // ... }
+```
+
+Hopefully now you know that even the most confusing looking destructuring is made up of these 4 styles. Parse them one by one and you'll be slinging code like this in no time.
