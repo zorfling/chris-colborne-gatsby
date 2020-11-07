@@ -1,5 +1,5 @@
 ---
-title: What Is This Syntax {x, Y=something()} = {}
+title: What Is This Syntax {x, y=something()} = {}
 path: object-destructuring
 date: 2020-11-07T14:07:17.645Z
 attribution: Illustration from unDraw
@@ -78,7 +78,7 @@ const {
 } = myObject; // now city variable is 'Brisbane' and state variable is 'QLD'
 ```
 
-Notice a trick here - address isn't actually destructured, it's just used to get at it's children. If you wanted the full address as well, you could either destructure address first here, then destructure it again, or do a double destructure.
+Notice a trick here - `address` isn't actually destructured, it's just used to get at it's children. If you wanted the full address as well, you could either destructure address first here, then destructure it again, or do a double destructure.
 
 ```js
 // destructure first then again
@@ -96,7 +96,7 @@ Great, we're starting to look like that initial snippet.
 
 ## Destructuring Defaults
 
-Next level is destructuring defaults. Up until now we've been assuming the data is there. But what happens if that key _might_ be there, _might_ not? That's where defaults come into play.
+Next level is destructuring defaults. Up until now, we've been assuming the data is there. But what happens if that key _might_ be there, _might_ not? That's where defaults come into play.
 
 ```js
 const myObject = {
