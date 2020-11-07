@@ -22,7 +22,7 @@ function doRender (
 ) { // ... }
 ```
 
-Wait, what, how? This little snippet breaks your brain. What was this developer thinking, were they just being too clever, or what?!
+Wait, what, how? This little snippet breaks your brain. What was this developer thinking? Were they just being too clever, or what?!
 
 Though it certainly is bracket soup, there is method in the madness. This is just a few different permutations of object destructuring layered on top of each other, inside a function call. So let's break it down bit by bit so you can read it.
 
@@ -96,7 +96,7 @@ Great, we're starting to look like that initial snippet.
 
 ## Destructuring Defaults
 
-Next level is destructuring defaults. Up until now, we've been assuming the data is there. But what happens if that key _might_ be there, _might_ not? That's where defaults come into play.
+Next level is destructuring defaults. Up until now, we've been assuming the data is there. But what happens if that key *might* be there, *might* not? That's where defaults come into play.
 
 ```js
 const myObject = {
@@ -128,12 +128,15 @@ const myObject = {
   // }
 };
 
+// bah bow - cannot read property 'city' of undefined
 const {
   address: { city }
-} = myObject; // bah bow - cannot read property 'city' of undefined
+} = myObject; 
 
 // so let's fix that with a default
-const { address: { city } = {} } = myObject; // hooray, now we're looking for city on an empty default object, which won't fail
+// hooray, now we're looking for city on an empty default object, 
+// which won't fail
+const { address: { city } = {} } = myObject; 
 ```
 
 ## Full Circle
