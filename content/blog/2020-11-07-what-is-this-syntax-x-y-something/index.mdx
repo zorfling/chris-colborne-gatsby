@@ -25,9 +25,11 @@ function doRender (
 ) { // ... }
 ```
 
-Wait, what, how? This little snippet breaks your brain. What was this developer thinking? Were they just being too clever, or what?! Though it certainly is bracket soup, there **is** method in the madness. 
+Wait, what, how? This little snippet breaks your brain. Brackets and colons and equals, oh my! What was this developer thinking? Were they just being too clever, or what?! 
 
-This is a few different levels of object destructuring layered on top of each other, inside a function call. Let's break it down bit by bit, so that you can read it like a pro.
+Although it certainly is bracket soup, there **is** method to the madness. 
+
+This is a few different levels of object destructuring, layered on top of each other, inside a function call. Let's break it down bit by bit, so that you can read it like a pro.
 
 ## Level 1: Basic Destructuring
 
@@ -158,15 +160,32 @@ So now we're back to our original brain breaker. We can see now that all we've g
 Still not convinced? Ok, we'll step through it bit by bit to make sure it sinks in:
 
 ```js
-function doRender (                 // function call
-  ui,                               // first parameter called `ui`
-  {                                 // destructure the second parameter
-    state: initialState,            // extract `state` to variable `initialState`
-    store = configureStore({        // extract `store` to a variable, and if it's unset, default to the result of configureStore()
-      reducer,                      // configureStore takes as argument an object with key `reducer` (which has the value of the variable `reducer`)
-      middleware: getMiddleware(),  // and a key `middleware` with the value returned from `getMiddleware()`
+// function call
+function doRender (
+
+  // first parameter called `ui`
+  ui,
+
+  // destructure the second parameter
+  {
+
+    // extract and rename `state` to variable `initialState`
+    state: initialState,
+
+    // extract `store` to a variable, and if it's unset, 
+    // default to the result of `configureStore()`
+    store = configureStore({
+
+      // configureStore takes as argument an object with key `reducer` (which has the value of the variable `reducer`)
+      reducer,
+
+      // and a key `middleware` with the value returned from `getMiddleware()`
+      middleware: getMiddleware(),  
     })
-  } = {}                            // default the second parameter to empty object, as it is optional
+
+    // finally, default the second parameter to empty object, as it is optional
+  } = {}
+
 ) { // ... }
 ```
 
