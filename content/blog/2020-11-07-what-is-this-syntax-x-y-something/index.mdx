@@ -1,19 +1,19 @@
 ---
-title: What Is This Syntax {x, y=something()} = {}
-path: object-destructuring
+title: Object Destructuring 101
+path: object-destructuring-101
 date: 2020-11-07T14:07:17.645Z
 attribution: Illustration from unDraw
-description: Learn to destructure objects so you can read crazy code
+description: "aka what on Earth does `{x: x2, y=getY()} = {};` mean?!"
 status: PUBLISHED
 featuredImage: undraw_processing_qj6a.png
 ---
-You're getting used to React, you've got components and arrow functions and maps down, then you run into this beast.
+You're getting used to React. You've got components and arrow functions and mapping over your data down pat. But then you run into this beast:
 
 ```js
 function doRender (
   ui,
   {
-    initialState,
+    state: initialState,
     store = configureStore({
       reducer,
       middleware: getMiddleware(),
@@ -22,13 +22,13 @@ function doRender (
 ) { // ... }
 ```
 
-Wait, what, how? This little snippet breaks your brain. What was this developer thinking? Were they just being too clever, or what?!
+Wait, what, how? This little snippet breaks your brain. What was this developer thinking? Were they just being too clever, or what?! Though it certainly is bracket soup, there **is** method in the madness. 
 
-Though it certainly is bracket soup, there is method in the madness. This is just a few different permutations of object destructuring layered on top of each other, inside a function call. So let's break it down bit by bit so you can read it.
+This is a few different levels of object destructuring layered on top of each other, inside a function call. Let's break it down bit by bit, so that you can read it like a pro.
 
-## Basic Destructuring
+## Level 1: Basic Destructuring
 
-First up, lets start with the basics. Object destructuring is just a way of extracting certain keys directly from an object. It's used quite heavily in React and other modern JavaScript frameworks. You already probably use it. It looks like this in it's basic form.
+First up, let's start with the basics. Object destructuring is just a way of extracting certain keys directly from an object. It's used quite heavily in React and other modern JavaScript frameworks. In fact you probably already use it. It looks like this in its basic form.
 
 ```js
 const myObject = {
@@ -37,12 +37,13 @@ const myObject = {
   city: 'Brisbane'
 };
 
-const { city } = myObject; // extracts 'Brisbane' and assigns it to a variable `city`
+// extracts 'Brisbane' and assigns it to a variable `city`
+const { city } = myObject;
 ```
 
 Easy right? Let's keep going.
 
-## Renaming Destructuring
+## Level 2: Renaming Destructuring
 
 So next level, what if we already had a variable `city`? Let's rename it as we extract it:
 
@@ -53,15 +54,18 @@ const myObject = {
   city: 'Brisbane'
 };
 
-const city = 'Sydney'; // oops we already have city in scope
-const { city: myCity } = myObject; // extracts 'Brisbane' and assigns it to a variable `myCity`
+// oops we already have city in scope
+const city = 'Sydney'; 
+
+// extracts 'Brisbane' and assigns it to a variable `myCity`
+const { city: myCity } = myObject; 
 ```
 
 Two from two, got it.
 
-## Multi Level Destructuring
+## Level 3: Multi-Level Destructuring
 
-Next up let's tackle multi level destructuring. That's when the variable you want to destructure is actually nested inside another key. Let's try and get at `city` and `state` in this nested object.
+Next up let's tackle multi-level destructuring. That's when the variable you want to destructure is actually nested inside another key. Let's try and get at `city` and `state` in this nested object.
 
 ```js
 const myObject = {
@@ -73,19 +77,20 @@ const myObject = {
   }
 };
 
+// now city variable is 'Brisbane' and state variable is 'QLD'
 const {
   address: { city, state }
-} = myObject; // now city variable is 'Brisbane' and state variable is 'QLD'
+} = myObject; 
 ```
 
-Notice a trick here - `address` isn't actually destructured, it's just used to get at its children. If you wanted the full address as well, you could either destructure address first here, then destructure it again, or do a double destructure.
+Notice a trick here - `address` isn't actually destructured, it's just used to get at its children. If you wanted the full address as well, you could either destructure the address first, then destructure address into city and state, or destructure twice.
 
 ```js
-// destructure first then again
+// destructure `address` then `city` from `address`
 const { address } = myObject;
 const { city } = address;
 
-// double destructure
+// destructure `address` itself, then `city` from within it
 const {
   address,
   address: { city }
@@ -94,9 +99,9 @@ const {
 
 Great, we're starting to look like that initial snippet.
 
-## Destructuring Defaults
+## Level 4: Destructuring Defaults
 
-Next level is destructuring defaults. Up until now, we've been assuming the data is there. But what happens if that key *might* be there, *might* not? That's where defaults come into play.
+Next level is destructuring defaults. Up until now, we've been assuming the data is there. But what happens if a particular key *might* be there, or *might* not? That's where defaults come into play.
 
 ```js
 const myObject = {
@@ -105,18 +110,21 @@ const myObject = {
   // city is missing for this one
 };
 
-const { city } = myObject; // `city` in this case will be `undefined`
+// `city` in this case will be `undefined` but won't blow up
+let { city } = myObject; 
 
 // let's add a default
-const { city1 = 'Sydney' } = myObject; // now `city1` will be 'Sydney' since it's not set
+// now `city` will be 'Sydney' since it's not set in `myObject`
+let { city = 'Sydney' } = myObject; 
 
 const myObject2 = {
-  city: 'Brisbane'
+  city2: 'Brisbane'
 };
-const { city2 = 'Sydney' } = myObject2; // but `city2` here will be 'Brisbane' since it was set
+// but `city2` here will be 'Brisbane' since it was set in `myObject2`
+const { city2 = 'Sydney' } = myObject2; 
 ```
 
-When we try to do multi level destructuring, that's where we might run into problems however. Take this example, we try and get the `city` from the `address` but there is no `address`.
+When we try to do multi-level destructuring (or more generally try to destructure something that might be undefined), that's where we might run into problems. Take this example, we try and get the `city` from the `address`, but there is no `address` in `myObject`.
 
 ```js
 const myObject = {
@@ -133,21 +141,24 @@ const {
   address: { city }
 } = myObject; 
 
-// so let's fix that with a default
-// hooray, now we're looking for city on an empty default object, 
-// which won't fail
+// so let's fix that with a default empty object
+// now we're looking for `city` in an empty object, 
+// which won't fail - `city` will be undefined
+// but won't blow up
 const { address: { city } = {} } = myObject; 
 ```
 
 ## Full Circle
 
-So now we're back to our original brain breaker. We can see now that all we've got is some multi level destructuring with defaults. Still not convinced? Ok we'll step through it bit by bit to make sure it sinks in:
+So now we're back to our original brain breaker. We can see now that all we've got is some multi-level destructuring with defaults. 
+
+Still not convinced? Ok, we'll step through it bit by bit to make sure it sinks in:
 
 ```js
 function doRender (                 // function call
   ui,                               // first parameter called `ui`
   {                                 // destructure the second parameter
-    initialState,                   // extract `initialState` to a variable
+    state: initialState,            // extract `state` to variable `initialState`
     store = configureStore({        // extract `store` to a variable, and if it's unset, default to the result of configureStore()
       reducer,                      // configureStore takes as argument an object with key `reducer` (which has the value of the variable `reducer`)
       middleware: getMiddleware(),  // and a key `middleware` with the value returned from `getMiddleware()`
@@ -156,4 +167,4 @@ function doRender (                 // function call
 ) { // ... }
 ```
 
-Hopefully now you know that even the most confusing looking destructuring is made up of these 4 styles. Parse them one by one and you'll be slinging code like this in no time.
+Hopefully, this has helped you see that even the most confusing looking destructuring is made up of these 4 levels. Parse them one by one, and you'll be reading and writing code like this in no time.
