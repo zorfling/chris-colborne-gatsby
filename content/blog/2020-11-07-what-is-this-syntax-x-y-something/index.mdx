@@ -1,5 +1,6 @@
 ---
-title: Object Destructuring 101
+title: "Object Destructuring 101 - aka what on Earth does `doIt({ x: x2 = getX()
+  } = {})` mean?!"
 path: object-destructuring-101
 date: 2020-11-08T00:00:00.000Z
 attribution: Illustration from unDraw
@@ -17,10 +18,7 @@ function doRender (
   ui,
   {
     state: initialState,
-    store = configureStore({
-      reducer,
-      middleware: getMiddleware(),
-    })
+    options = getOptions({ overrides })
   } = {}
 ) { // ... }
 ```
@@ -172,16 +170,9 @@ function doRender (
     // extract and rename `state` to variable `initialState`
     state: initialState,
 
-    // extract `store` to a variable, and if it's unset, 
-    // default to the result of `configureStore()`
-    store = configureStore({
-
-      // configureStore takes as argument an object with key `reducer` (which has the value of the variable `reducer`)
-      reducer,
-
-      // and a key `middleware` with the value returned from `getMiddleware()`
-      middleware: getMiddleware(),  
-    })
+    // extract `options` to a variable, and if it's unset, 
+    // default to the result of `getOptions()`
+    options = getOptions({ overrides })
 
     // finally, default the second parameter to empty object, as it is optional
   } = {}
