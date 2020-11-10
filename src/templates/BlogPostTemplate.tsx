@@ -3,7 +3,7 @@ import Img, { FluidObject } from 'gatsby-image';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 
-import { MetaProps } from 'react-helmet';
+import { Helmet, MetaProps } from 'react-helmet';
 import styled from 'styled-components';
 import { BlogPostBySlugQuery } from '../../graphql-types';
 import Bio from '../components/Bio';
@@ -63,6 +63,12 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
 
   return (
     <Layout location={location} title={siteTitle}>
+      <Helmet>
+        <link
+          rel="canonical"
+          href={`${data.site?.siteMetadata?.siteUrl}/${post?.fields?.slug}`}
+        />
+      </Helmet>
       <SEO
         title={post?.frontmatter?.title || ''}
         description={post?.frontmatter?.description || post?.excerpt}
@@ -125,6 +131,9 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       body
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
