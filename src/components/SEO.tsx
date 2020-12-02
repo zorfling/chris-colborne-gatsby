@@ -22,7 +22,7 @@ const SEO: React.FC<Props> = ({
   meta = [],
   title,
 }) => {
-  const { site } = useStaticQuery(
+  const { site } = useStaticQuery<GraphqlTypes.SEOQuery>(
     graphql`
       query SEO {
         site {

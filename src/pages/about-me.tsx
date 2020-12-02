@@ -4,7 +4,6 @@ import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import React, { FC } from 'react';
 
 import styled from 'styled-components';
-import { AboutPageQuery } from '../../graphql-types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import { rhythm } from '../utils/typography';
@@ -47,7 +46,10 @@ const StyledImage = styled(Image)`
 
 const age = new Date().getFullYear() - 2013;
 
-const AboutPage: FC<PageProps<AboutPageQuery>> = ({ data, location }) => {
+const AboutPage: FC<PageProps<GraphqlTypes.AboutPageQuery>> = ({
+  data,
+  location,
+}) => {
   const siteTitle = data.site?.siteMetadata?.title;
   const author = data.site?.siteMetadata?.author;
 
