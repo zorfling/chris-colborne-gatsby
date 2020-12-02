@@ -71,7 +71,7 @@ const BlogPostTemplate: React.FC<PageProps<
       <Helmet>
         <link
           rel="canonical"
-          href={`${data.site?.siteMetadata?.siteUrl}/${post?.fields?.slug}`}
+          href={`${data.site?.siteMetadata?.siteUrl}${post?.fields?.slug}`}
         />
       </Helmet>
       <SEO
