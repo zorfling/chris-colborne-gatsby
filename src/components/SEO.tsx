@@ -19,7 +19,12 @@ interface Props {
 const SEO: React.FC<Props> = ({
   description = '',
   lang = 'en',
-  meta = [],
+  meta = [
+    {
+      property: 'og:type',
+      content: `website`,
+    },
+  ],
   title,
 }) => {
   const { site } = useStaticQuery<GraphqlTypes.SEOQuery>(
@@ -38,7 +43,7 @@ const SEO: React.FC<Props> = ({
     `
   );
 
-  const metaDescription = description || site.siteMetadata.description;
+  const metaDescription = description || site?.siteMetadata?.description;
 
   return (
     <Helmet
@@ -46,42 +51,45 @@ const SEO: React.FC<Props> = ({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      defaultTitle={site.siteMetadata.title}
-      meta={([
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.social.twitter,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ] as MetaProps[]).concat(meta)}
+      titleTemplate={`%s | ${site?.siteMetadata?.title}`}
+      defaultTitle={site?.siteMetadata?.title}
+      meta={
+        [
+          {
+            name: `description`,
+            content: metaDescription,
+          },
+          {
+            property: `og:title`,
+            content: title,
+          },
+          {
+            property: `og:description`,
+            content: metaDescription,
+          },
+          {
+            name: `author`,
+            content: `Chris Colborne`,
+          },
+          {
+            name: `twitter:card`,
+            content: `summary`,
+          },
+          {
+            name: `twitter:creator`,
+            content: site?.siteMetadata?.social?.twitter,
+          },
+          {
+            name: `twitter:title`,
+            content: title,
+          },
+          {
+            name: `twitter:description`,
+            content: metaDescription,
+          },
+          ...meta,
+        ] as MetaProps[]
+      }
     />
   );
 };
