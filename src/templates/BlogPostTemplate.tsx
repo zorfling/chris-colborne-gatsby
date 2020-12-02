@@ -56,6 +56,14 @@ const BlogPostTemplate: React.FC<PageProps<
       property: 'og:image',
       content: `${data.site?.siteMetadata?.siteUrl}${fluidObject?.src}`,
     },
+    {
+      property: 'og:type',
+      content: `article`,
+    },
+    {
+      property: 'article:published_time',
+      content: `${post?.frontmatter?.timestamp}`,
+    },
   ];
 
   return (
@@ -134,6 +142,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        timestamp: date(formatString: "X")
         description
         attribution
         featuredImage {
