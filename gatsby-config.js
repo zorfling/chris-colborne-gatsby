@@ -135,6 +135,7 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+        omitGoogleFont: true,
       },
     },
     `gatsby-plugin-netlify-cms`,
@@ -168,18 +169,32 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          {
-            family: `Open Sans`,
-            variants: [`700`],
-          },
-          {
-            family: `Merriweather`,
-            variants: [`300`, `300i`, `700`, `700i`],
-          },
-        ],
+        fonts: {
+          google: [
+            {
+              family: 'Open Sans',
+              variants: ['700'],
+              // subsets: ['latin']
+              // text: 'Hello'
+              // fontDisplay: 'swap',
+              // strategy: 'selfHosted' // 'base64' || 'cdn'
+            },
+            {
+              family: 'Merriweather',
+              variants: ['300', '300i', '700', '700i'],
+              // subsets: ['latin']
+              // text: 'Hello'
+              // fontDisplay: 'swap',
+              // strategy: 'selfHosted' // 'base64' || 'cdn'
+            },
+          ],
+        },
+        // formats: ['woff2', 'woff'],
+        // useMinify: true,
+        // usePreload: true,
+        // usePreconnect: false,
       },
     },
   ],
