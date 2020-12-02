@@ -29,7 +29,7 @@ const StyledImage = styled(Image)`
 `;
 
 const Bio = () => {
-  const data = useStaticQuery(graphql`
+  const data = useStaticQuery<GraphqlTypes.BioQueryQuery>(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {

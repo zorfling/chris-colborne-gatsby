@@ -3,7 +3,6 @@ import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 
 import styled from 'styled-components';
-import { BlogIndexQuery } from '../../graphql-types';
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
@@ -13,7 +12,10 @@ const PostTitle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)};
 `;
 
-const BlogIndex: React.FC<PageProps<BlogIndexQuery>> = ({ data, location }) => {
+const BlogIndex: React.FC<PageProps<GraphqlTypes.BlogIndexQuery>> = ({
+  data,
+  location,
+}) => {
   const siteTitle = data.site?.siteMetadata?.title;
   const posts = data.allMdx.edges;
 

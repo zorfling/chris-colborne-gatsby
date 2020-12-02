@@ -7,7 +7,6 @@
     "plugin:jest-dom/recommended"
   ],
   "plugins": ["import", "jest-dom"],
-  "ignorePatterns": ["graphql-types.ts"],
   "rules": {
     "arrow-body-style": "off",
     "camelcase": ["error"],

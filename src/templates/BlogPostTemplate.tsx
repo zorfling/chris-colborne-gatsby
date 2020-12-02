@@ -5,7 +5,6 @@ import React from 'react';
 
 import { Helmet, MetaProps } from 'react-helmet';
 import styled from 'styled-components';
-import { BlogPostBySlugQuery } from '../../graphql-types';
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
 import MailingSignup from '../components/MailingSignup';
@@ -35,11 +34,9 @@ const Pagination = styled.ul`
   padding: 0;
 `;
 
-const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
-  data,
-  pageContext,
-  location,
-}) => {
+const BlogPostTemplate: React.FC<PageProps<
+  GraphqlTypes.BlogPostBySlugQuery
+>> = ({ data, pageContext, location }) => {
   const post = data.mdx;
   const siteTitle = data.site?.siteMetadata?.title;
   const { previous, next } = pageContext as any;
