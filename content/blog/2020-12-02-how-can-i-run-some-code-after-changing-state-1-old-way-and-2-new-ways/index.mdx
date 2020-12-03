@@ -41,16 +41,6 @@ useEffect(() => {
 
 Pretty simple, every time `name` changes, we'll run the function, which `console.log`s the name out. 
 
-### Gotcha 1 - useEffect infinite loops
-
-Logging out the state is a pretty contrived example. 
-
-What if we had a status and wanted to save a history of the previous steps:
-
-```js
-
-```
-
 ## Method 2 - useReducer
 
 When you find yourself needing more complex state updates, where updating one item of state affects another item of state, you can reach for `useReducer`.
