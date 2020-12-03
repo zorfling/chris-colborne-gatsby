@@ -8,24 +8,52 @@ description: Running code after changing state is a common desire. Lets look at
 status: PUBLISHED
 featuredImage: undraw_connection_b38q.png
 ---
-Running code after changing state is a common desire. Lets look at how to do that with hooks
+Running some code after changing state is a common desire. Let's look at how to do that with hooks. If you're not careful you can find yourself with an infinite loop.
 
-Old way
+# ---
+## First The Old Way
 
-this.setState has a callback
+If you're still using classes for your components, you're in luck. The class component `setState` has a callback just for this reason. It takes the following form:
+
+```js
+this.setState({ myState: 'updatedState' }, () => {
+  // do something after the re-render here
+  console.log(this.state.myState);
+}
+```
+
+NB: it's recommended to use componentDidUpdate for this sort of logic, but it does exist here anyway
+# ---
 
 
 
-New way 1
+## Method 1 - useEffect
 
-useEffect
+The first and most commonly used method to run a function after updating state is the `useEffect` hook. `useEffect` runs its function only when the items in the dependency array change. Sounds pretty spot on for what we want huh? Let's see it in action:
 
+```js
+const [name, setName] = useState('John Doe');
+useEffect(() => {
+  // run something every time name changes
+  console.log(name);
+}, [name]); // <-- dependency array
+``` 
 
+Pretty simple, every time `name` changes, we'll run the function, which `console.log`s the name out. 
 
-New way 2
+### Gotcha 1 - useEffect infinite loops
 
-useReducer
+Logging out the state is a pretty contrived example. 
 
+What if we wanted to save a list of the previous steps:
+
+```js
+
+```
+
+## Method 2 - useReducer
+
+When you find yourself needing more complex 
 
 
 The end
