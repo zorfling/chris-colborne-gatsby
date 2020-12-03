@@ -55,6 +55,46 @@ What if we had a status and wanted to save a history of the previous steps:
 
 When you find yourself needing more complex state updates, where updating one item of state affects another item of state, you can reach for `useReducer`.
 
+What if we had a status and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
+
+```js
+const CHANGE_STATE = 'CHANGE_STATE';
+const CLEAR_HISTORY = 'CLEAR_HISTORY';
+const reducer = (state, action) => {
+    const { status, history } = state;
+    const { type, newStatus } = action;
+
+    switch (type) {
+        case CHANGE_STATE:
+            return { status: newStatus, history: [...history, status] };
+        case CLEAR_HISTORY:
+            return { status, history: [] };
+        default:
+            break;
+    }
+};
+export const StatusHistory = () => {
+    const [state, dispatch] = useReducer(reducer, { status: 'stopped', history: [] });
+
+    return (
+        <div>
+            <p>Current status: {state?.status}</p>
+            <ul>
+                {state?.history.map(previousStatus => (
+                    <li>{previousStatus}</li>
+                ))}
+            </ul>
+            <button onClick={() => dispatch({ type: CHANGE_STATE, newStatus: 'started' })}>
+                Start it
+            </button>
+            <button onClick={() => dispatch({ type: CHANGE_STATE, newStatus: 'finished' })}>
+                Finish it
+            </button>
+            <button onClick={() => dispatch({ type: CLEAR_HISTORY })}>Clear History</button>
+        </div>
+    );
+};
+```
 
 
 The end
