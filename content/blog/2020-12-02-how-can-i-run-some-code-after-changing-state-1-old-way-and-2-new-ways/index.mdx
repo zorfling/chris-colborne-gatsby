@@ -45,7 +45,7 @@ Pretty simple, every time `name` changes, we'll run the function, which `console
 
 Logging out the state is a pretty contrived example. 
 
-What if we wanted to save a list of the previous steps:
+What if we had a status and wanted to save a history of the previous steps:
 
 ```js
 
@@ -53,7 +53,8 @@ What if we wanted to save a list of the previous steps:
 
 ## Method 2 - useReducer
 
-When you find yourself needing more complex 
+When you find yourself needing more complex state updates, where updating one item of state affects another item of state, you can reach for `useReducer`.
+
 
 
 The end
