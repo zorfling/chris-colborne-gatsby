@@ -33,32 +33,34 @@ What if we had a status, and wanted to save a history of the last 10 statuses? B
 ```js
 const CHANGE_STATE = 'CHANGE_STATE';
 const CLEAR_HISTORY = 'CLEAR_HISTORY';
-const reducer = (state, action) => {
-  const { status, history } = state;
-  const { type, newStatus } = action;
 
-  switch (type) {
-    case CHANGE_STATE:
-      let newHistory = [...history, status];
-      if (newHistory.length > 10) {
-        newHistory.shift();
-      }
+const reducer = (state, action) => { // highlighted
+  const { status, history } = state; // highlighted
+  const { type, newStatus } = action; // highlighted
 
-      return { status: newStatus, history: newHistory };
-    case CLEAR_HISTORY:
-      return { status, history: [] };
-    default:
-      break;
-  }
-};
+  switch (type) { // highlighted
+    case CHANGE_STATE: // highlighted
+      let newHistory = [...history, status]; // highlighted
+      if (newHistory.length > 10) { // highlighted
+        newHistory.shift(); // highlighted
+      } // highlighted
+
+      return { status: newStatus, history: newHistory }; // highlighted
+    case CLEAR_HISTORY: // highlighted
+      return { status, history: [] }; // highlighted
+    default: // highlighted
+      break; // highlighted
+  } // highlighted
+}; // highlighted
+
 export const StatusHistory = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    status: 'stopped',
-    history: []
-  });
-  const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' });
-  const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' });
-  const clear = () => dispatch({ type: CLEAR_HISTORY });
+  const [state, dispatch] = useReducer(reducer, { // highlighted
+    status: 'stopped', // highlighted
+    history: [] // highlighted
+  }); // highlighted
+  const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' }); // highlighted
+  const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' }); // highlighted
+  const clear = () => dispatch({ type: CLEAR_HISTORY }); // highlighted
 
   return (
     <div>
@@ -76,6 +78,6 @@ export const StatusHistory = () => {
 };
 ```
 
-Hopefully this has shown you two options for running code after state has been changed with React hooks.
+Hopefully, this has shown you two options for running code after changing state with React hooks.
 
 tl;dr - if the state (and code to run) is simple, you can go with `useEffect`. If you've got multiple items of state that need to be updated based on changes, go with `useReducer`. 
