@@ -4,30 +4,13 @@ path: /run-code-after-changing-state/
 date: 2020-12-02T14:49:14.633Z
 attribution: Illustration from Undraw
 description: Running code after changing state is a common desire. Lets look at
-  how to do that with hooks
+  how to do that with hooks.
 status: PUBLISHED
 featuredImage: undraw_connection_b38q.png
 ---
-Running some code after changing state is a common desire. Let's look at how to do that with hooks. If you're not careful you can find yourself with an infinite loop.
+Running some code after changing state is a common desire. Let's look at how to do that with hooks.
 
-# ---
-## First The Old Way
-
-If you're still using classes for your components, you're in luck. The class component `setState` has a callback just for this reason. It takes the following form:
-
-```js
-this.setState({ myState: 'updatedState' }, () => {
-  // do something after the re-render here
-  console.log(this.state.myState);
-}
-```
-
-NB: it's recommended to use componentDidUpdate for this sort of logic, but it does exist here anyway
-# ---
-
-
-
-## Method 1 - useEffect
+## Method 1 - useEffect hook
 
 The first and most commonly used method to run a function after updating state is the `useEffect` hook. `useEffect` runs its function only when the items in the dependency array change. Sounds pretty spot on for what we want huh? Let's see it in action:
 
@@ -37,57 +20,55 @@ useEffect(() => {
   // run something every time name changes
   console.log(name);
 }, [name]); // <-- dependency array
-``` 
+```
 
 Pretty simple, every time `name` changes, we'll run the function, which `console.log`s the name out. 
 
-## Method 2 - useReducer
+## Method 2 - useReducer hook
 
 When you find yourself needing more complex state updates, where updating one item of state affects another item of state, you can reach for `useReducer`.
 
-What if we had a status and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
+What if we had a status, and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
 
 ```js
 const CHANGE_STATE = 'CHANGE_STATE';
 const CLEAR_HISTORY = 'CLEAR_HISTORY';
 const reducer = (state, action) => {
-    const { status, history } = state;
-    const { type, newStatus } = action;
+  const { status, history } = state;
+  const { type, newStatus } = action;
 
-    switch (type) {
-        case CHANGE_STATE:
-            return { status: newStatus, history: [...history, status] };
-        case CLEAR_HISTORY:
-            return { status, history: [] };
-        default:
-            break;
-    }
+  switch (type) {
+    case CHANGE_STATE:
+      return { status: newStatus, history: [...history, status] };
+    case CLEAR_HISTORY:
+      return { status, history: [] };
+    default:
+      break;
+  }
 };
 export const StatusHistory = () => {
-    const [state, dispatch] = useReducer(reducer, { status: 'stopped', history: [] });
-    const start = useCallback(() => dispatch({ type: CHANGE_STATE, newStatus: 'started' }));
-    const finish = useCallback(() => dispatch({ type: CHANGE_STATE, newStatus: 'finished' }));
-    const clear = useCallback(() => dispatch({ type: CLEAR_HISTORY }));
+  const [state, dispatch] = useReducer(reducer, {
+    status: 'stopped',
+    history: []
+  });
+  const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' });
+  const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' });
+  const clear = () => dispatch({ type: CLEAR_HISTORY });
 
-    return (
-        <div>
-            <p>Current status: {state?.status}</p>
-            <ul>
-                {state?.history.map(previousStatus => (
-                    <li>{previousStatus}</li>
-                ))}
-            </ul>
-            <button onClick={start}>
-                Start it
-            </button>
-            <button onClick={finish}>
-                Finish it
-            </button>
-            <button onClick={clear}>Clear History</button>
-        </div>
-    );
+  return (
+    <div>
+      <p>Current status: {state.status}</p>
+      <ul>
+        {state.history.map((previousStatus) => (
+          <li>{previousStatus}</li>
+        ))}
+      </ul>
+      <button onClick={start}>Start it</button>
+      <button onClick={finish}>Finish it</button>
+      <button onClick={clear}>Clear History</button>
+    </div>
+  );
 };
 ```
-
 
 The end
