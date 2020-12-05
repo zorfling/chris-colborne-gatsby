@@ -85,7 +85,12 @@ const CoursesPage: FC<PageProps<CoursesPageQuery>> = ({ data, location }) => {
             </OutboundLink>
           </li>
         </ul>
-      </div>{' '}
+        <p>
+          PS: The above are affiliate links - I recommended Wes' courses so
+          often to friends and workmates that I signed up as an affiliate. It
+          doesn't cost you any more, and just says thanks for the tip!
+        </p>
+      </div>
     </Layout>
   );
 };
