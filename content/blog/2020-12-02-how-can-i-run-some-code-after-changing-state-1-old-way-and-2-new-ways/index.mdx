@@ -30,7 +30,7 @@ When you find yourself needing more complex state updates, where updating one it
 
 What if we had a status, and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
 
-```js
+```js{4-21,24-30}
 const CHANGE_STATE = 'CHANGE_STATE';
 const CLEAR_HISTORY = 'CLEAR_HISTORY';
 
@@ -44,7 +44,6 @@ const reducer = (state, action) => { // highlighted
       if (newHistory.length > 10) { // highlighted
         newHistory.shift(); // highlighted
       } // highlighted
-
       return { status: newStatus, history: newHistory }; // highlighted
     case CLEAR_HISTORY: // highlighted
       return { status, history: [] }; // highlighted
