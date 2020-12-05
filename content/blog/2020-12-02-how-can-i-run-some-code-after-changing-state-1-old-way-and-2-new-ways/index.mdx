@@ -1,0 +1,83 @@
+---
+title: How can I run some code after changing state with React hooks?
+path: /react-hooks-run-code-after-changing-state/
+date: 2020-12-05T14:49:14.633Z
+attribution: Illustration from Undraw
+description: Running code after changing state is a common desire. Lets look at
+  how to do that with hooks.
+status: PUBLISHED
+featuredImage: undraw_connection_b38q.png
+---
+Running some code after changing state is a common desire. Let's look at how to do that with hooks.
+
+## Method 1 - useEffect hook
+
+The first and most commonly used method to run a function after updating state is the `useEffect` hook. `useEffect` runs its function only when the items in the dependency array change. Sounds pretty spot on for what we want huh? Let's see it in action:
+
+```js
+const [name, setName] = useState('John Doe');
+useEffect(() => {
+  // run something every time name changes
+  console.log(name);
+}, [name]); // <-- dependency array
+```
+
+Pretty simple, every time `name` changes, we'll run the function, which `console.log`s the name out. 
+
+## Method 2 - useReducer hook
+
+When you find yourself needing more complex state updates, where updating one item of state affects another item of state, you can reach for `useReducer`.
+
+What if we had a status, and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
+
+```js
+const CHANGE_STATE = 'CHANGE_STATE';
+const CLEAR_HISTORY = 'CLEAR_HISTORY';
+
+const reducer = (state, action) => {
+  const { status, history } = state;
+  const { type, newStatus } = action;
+
+  switch (type) {
+    case CHANGE_STATE:
+      let newHistory = [...history, status];
+      if (newHistory.length > 10) {
+        newHistory.shift();
+      }
+      return { status: newStatus, history: newHistory };
+    case CLEAR_HISTORY:
+      return { status, history: [] };
+    default:
+      return state;
+      break;
+  }
+};
+
+export const StatusHistory = () => {
+  const [state, dispatch] = useReducer(reducer, {
+    status: 'stopped',
+    history: []
+  });
+  const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' });
+  const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' });
+  const clear = () => dispatch({ type: CLEAR_HISTORY });
+
+  return (
+    <div>
+      <p>Current status: {state.status}</p>
+      <ul>
+        {state.history.map((previousStatus) => (
+          <li>{previousStatus}</li>
+        ))}
+      </ul>
+      <button onClick={start}>Start it</button>
+      <button onClick={finish}>Finish it</button>
+      <button onClick={clear}>Clear History</button>
+    </div>
+  );
+};
+```
+
+Hopefully, this has shown you two options for running code after changing state with React hooks.
+
+**tl;dr** - if the state (and code to run) is simple, you can go with `useEffect`. If you've got multiple items of state that need to be updated based on changes, go with `useReducer`. 
