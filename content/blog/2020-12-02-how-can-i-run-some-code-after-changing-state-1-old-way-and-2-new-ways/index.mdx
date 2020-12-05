@@ -1,7 +1,7 @@
 ---
-title: How can I run some code after changing state? 1 old way and 2 new ways
-path: /run-code-after-changing-state/
-date: 2020-12-02T14:49:14.633Z
+title: How can I run some code after changing state with React hooks?
+path: /react-hooks-run-code-after-changing-state/
+date: 2020-12-05T14:49:14.633Z
 attribution: Illustration from Undraw
 description: Running code after changing state is a common desire. Lets look at
   how to do that with hooks.
@@ -39,7 +39,12 @@ const reducer = (state, action) => {
 
   switch (type) {
     case CHANGE_STATE:
-      return { status: newStatus, history: [...history, status] };
+      let newHistory = [...history, status];
+      if (newHistory.length > 10) {
+        newHistory.shift();
+      }
+
+      return { status: newStatus, history: newHistory };
     case CLEAR_HISTORY:
       return { status, history: [] };
     default:
@@ -71,4 +76,6 @@ export const StatusHistory = () => {
 };
 ```
 
-The end
+Hopefully this has shown you two options for running code after state has been changed with React hooks.
+
+tl;dr - if the state (and code to run) is simple, you can go with `useEffect`. If you've got multiple items of state that need to be updated based on changes, go with `useReducer`. 
