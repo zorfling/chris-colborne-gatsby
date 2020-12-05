@@ -11,6 +11,13 @@ const Wrapper = styled.div`
   margin-right: auto;
   max-width: ${rhythm(24)};
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+
+  p code {
+    font-size: 1rem;
+  }
+  h2 code {
+    font-size: 1.5rem;
+  }
 `;
 
 const Footer = styled.footer`
