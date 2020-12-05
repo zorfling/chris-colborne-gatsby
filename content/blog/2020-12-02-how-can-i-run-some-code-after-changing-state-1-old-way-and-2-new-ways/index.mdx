@@ -34,33 +34,33 @@ What if we had a status, and wanted to save a history of the last 10 statuses? B
 const CHANGE_STATE = 'CHANGE_STATE';
 const CLEAR_HISTORY = 'CLEAR_HISTORY';
 
-const reducer = (state, action) => { // highlighted
-  const { status, history } = state; // highlighted
-  const { type, newStatus } = action; // highlighted
+const reducer = (state, action) => {
+  const { status, history } = state;
+  const { type, newStatus } = action;
 
-  switch (type) { // highlighted
-    case CHANGE_STATE: // highlighted
-      let newHistory = [...history, status]; // highlighted
-      if (newHistory.length > 10) { // highlighted
-        newHistory.shift(); // highlighted
-      } // highlighted
-      return { status: newStatus, history: newHistory }; // highlighted
-    case CLEAR_HISTORY: // highlighted
-      return { status, history: [] }; // highlighted
-    default: // highlighted
-      return state; // highlighted
-      break; // highlighted
-  } // highlighted
-}; // highlighted
+  switch (type) {
+    case CHANGE_STATE:
+      let newHistory = [...history, status];
+      if (newHistory.length > 10) {
+        newHistory.shift();
+      }
+      return { status: newStatus, history: newHistory };
+    case CLEAR_HISTORY:
+      return { status, history: [] };
+    default:
+      return state;
+      break;
+  }
+};
 
 export const StatusHistory = () => {
-  const [state, dispatch] = useReducer(reducer, { // highlighted
-    status: 'stopped', // highlighted
-    history: [] // highlighted
-  }); // highlighted
-  const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' }); // highlighted
-  const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' }); // highlighted
-  const clear = () => dispatch({ type: CLEAR_HISTORY }); // highlighted
+  const [state, dispatch] = useReducer(reducer, {
+    status: 'stopped',
+    history: []
+  });
+  const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' });
+  const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' });
+  const clear = () => dispatch({ type: CLEAR_HISTORY });
 
   return (
     <div>
