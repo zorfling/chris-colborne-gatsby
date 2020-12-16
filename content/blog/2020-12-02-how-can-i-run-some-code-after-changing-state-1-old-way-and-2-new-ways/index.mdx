@@ -30,7 +30,7 @@ When you find yourself needing more complex state updates, where updating one it
 
 What if we had a status, and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
 
-```js
+```mdx:title=src/pages/layout-example.mdx
 const CHANGE_STATE = 'CHANGE_STATE';
 const CLEAR_HISTORY = 'CLEAR_HISTORY';
 
