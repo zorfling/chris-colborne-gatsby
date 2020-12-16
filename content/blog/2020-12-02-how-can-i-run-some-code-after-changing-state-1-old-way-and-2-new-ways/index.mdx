@@ -8,6 +8,7 @@ description: Running code after changing state is a common desire. Lets look at
 status: PUBLISHED
 featuredImage: undraw_connection_b38q.png
 ---
+
 Running some code after changing state is a common desire. Let's look at how to do that with hooks.
 
 ## Method 1 - useEffect hook
@@ -22,7 +23,7 @@ useEffect(() => {
 }, [name]); // <-- dependency array
 ```
 
-Pretty simple, every time `name` changes, we'll run the function, which `console.log`s the name out. 
+Pretty simple, every time `name` changes, we'll run the function, which `console.log`s the name out.
 
 ## Method 2 - useReducer hook
 
@@ -30,7 +31,7 @@ When you find yourself needing more complex state updates, where updating one it
 
 What if we had a status, and wanted to save a history of the last 10 statuses? Because the history relies on changes to the status, `useReducer` would be a good choice here. Let's see it in action:
 
-```mdx:title=src/pages/layout-example.mdx
+```tsx:title=src/App.tsx
 const CHANGE_STATE = 'CHANGE_STATE';
 const CLEAR_HISTORY = 'CLEAR_HISTORY';
 
@@ -56,7 +57,7 @@ const reducer = (state, action) => {
 export const StatusHistory = () => {
   const [state, dispatch] = useReducer(reducer, {
     status: 'stopped',
-    history: []
+    history: [],
   });
   const start = () => dispatch({ type: CHANGE_STATE, newStatus: 'started' });
   const finish = () => dispatch({ type: CHANGE_STATE, newStatus: 'finished' });
@@ -66,7 +67,7 @@ export const StatusHistory = () => {
     <div>
       <p>Current status: {state.status}</p>
       <ul>
-        {state.history.map((previousStatus) => (
+        {state.history.map(previousStatus => (
           <li>{previousStatus}</li>
         ))}
       </ul>
@@ -80,4 +81,4 @@ export const StatusHistory = () => {
 
 Hopefully, this has shown you two options for running code after changing state with React hooks.
 
-**tl;dr** - if the state (and code to run) is simple, you can go with `useEffect`. If you've got multiple items of state that need to be updated based on changes, go with `useReducer`. 
+**tl;dr** - if the state (and code to run) is simple, you can go with `useEffect`. If you've got multiple items of state that need to be updated based on changes, go with `useReducer`.
