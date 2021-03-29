@@ -142,8 +142,8 @@ const MailingSignup = () => {
 
   return (
     <Container>
-      <Title>Stay up to date!</Title>
-      <Body>Subscribe to get my latest articles by email.</Body>
+      <Title>Like what you've read?</Title>
+      <Body>Why not subscribe to my mailing list to get my latest articles by email.</Body>
 
       {status === 'success' && (
         <Success>
@@ -175,7 +175,7 @@ const MailingSignup = () => {
 
         <Button type="submit">Subscribe</Button>
       </Form>
-      <FinePrint>I'll never send you spam. Unsubscribe at any time.</FinePrint>
+      <FinePrint>I respect the privacy of your email address. You can unsubscribe at any time.</FinePrint>
     </Container>
   );
 };
