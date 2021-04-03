@@ -14,7 +14,7 @@ collections:
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     path: '{{slug}}/index'
-    summary: '{{title}} -- {{year}}-{{month}}-{{day}}'
+    summary: '{{year}}-{{month}}-{{day}} -- {{title}}'
     media_folder: ''
     public_folder: ''
     extension: mdx
@@ -29,6 +29,9 @@ collections:
       - label: Year
         field: date
         pattern: \d{4}
+      - label: Status
+        field: status
+        pattern: DRAFT
     format: frontmatter
     fields:
       - { name: title, label: Title }
