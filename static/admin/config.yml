@@ -8,11 +8,13 @@ publish_mode: editorial_workflow
 
 collections:
   - name: blog
-    label: Blog
+    label: 'Blog Posts'
+    label_singular: 'Blog Post'
     folder: content/blog
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     path: '{{slug}}/index'
+    summary: '{{title}} -- {{year}}-{{month}}-{{day}}'
     media_folder: ''
     public_folder: ''
     extension: mdx
@@ -23,6 +25,10 @@ collections:
       - label: Published
         field: status
         pattern: PUBLISHED
+    view_groups:
+      - label: Year
+        field: date
+        pattern: \d{4}
     format: frontmatter
     fields:
       - { name: title, label: Title }
