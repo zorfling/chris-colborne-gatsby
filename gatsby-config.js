@@ -214,7 +214,7 @@ module.exports = {
       options: {
         dsn:
           'https://98ba23f094444aadba4b46a9e934b45a@o235038.ingest.sentry.io/5714563',
-        tracesSampleRate: 0.5,
+        tracesSampleRate: 1,
       },
     },
   ],
