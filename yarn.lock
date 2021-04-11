@@ -1079,21 +1079,6 @@
   dependencies:
     core-js "^3.6.4"
 
-"@datadog/browser-core@1.26.3":
-  version "1.26.3"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-1.26.3.tgz#b404861bc596abccf7b02a043c32bba40f3e0bbd"
-  integrity sha512-/YrSvljK4RnjiLBX18P23PtcpYUPnSUVafy+41MatN8ZjtdzFsdK4VxQWhLFygG/Au8pvXacU1Kg7CVRk7hbMQ==
-  dependencies:
-    tslib "^1.10.0"
-
-"@datadog/browser-rum@^1.18.0":
-  version "1.26.3"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-1.26.3.tgz#6d76cfd582a18b8f5f561bff96d4ce44679b3d4d"
-  integrity sha512-nCr3WndXZMpmvOdzIp8pLQ/vQSrpf9zCKO6/BQ2/pwyApNoj7sTxClbBXAzZD3WRSCUQfPjSKisWqGnYJSaknw==
-  dependencies:
-    "@datadog/browser-core" "1.26.3"
-    tslib "^1.10.0"
-
 "@emotion/babel-utils@^0.6.4":
   version "0.6.10"
   resolved "https://registry.yarnpkg.com/@emotion/babel-utils/-/babel-utils-0.6.10.tgz#83dbf3dfa933fae9fc566e54fbb45f14674c6ccc"
