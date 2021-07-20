@@ -7,24 +7,6 @@ interface Props {
   title: string;
 }
 
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: ${rhythm(1.5)};
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const Title = styled.h1`
-  ${{ ...scale(1.5) }};
-  margin-top: 0;
-  margin-bottom: 0;
-`;
-
 const Nav = styled.nav`
   font-size: 0.825rem;
 
@@ -34,6 +16,28 @@ const Nav = styled.nav`
       margin-left: 0;
     }
   }
+`;
+
+const HeaderContainer = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${rhythm(1.5)};
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    & ${Nav} {
+      margin-top: 12px;
+    }
+  }
+`;
+
+const Title = styled.h1`
+  ${{ ...scale(1.5) }};
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const HeaderHome: React.FC<Props> = ({ title }) => {
