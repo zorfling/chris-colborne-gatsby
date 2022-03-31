@@ -15,6 +15,8 @@ In TypeScript, there are a few ways to type functions. But did you know that usi
 
 There are three main ways you can type a function in TypeScript.
 
+### 1. Arrow function syntax
+
 The most common and recommended way is to type it as an arrow function:
 
 ```ts
@@ -22,6 +24,8 @@ interface MyObj {
   add: (a:number, b: number) => number
 }
 ```
+
+### 2. Call signature syntax
 
 Another less common way is as a call signature. This is often useful if the function has properties as well as being callable.
 
@@ -34,7 +38,9 @@ interface MyObj {
 }
 ```
 
-The final way is as a method signature. This often makes sense when talking about classes, but is also valid for interfaces.
+### 3. Method syntax
+
+The final way is method syntax. This often makes sense when talking about classes but is also valid for interfaces.
 
 ```ts
 class MyCalculator {
