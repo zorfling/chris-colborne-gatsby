@@ -11,7 +11,7 @@ featuredImage: undraw_connection_b38q.png
 ---
 In TypeScript, there are a few ways to type functions. But did you know that using the method syntax to define your functions in TypeScript is not type safe?
 
-\--
+## Typing Functions
 
 There are three main ways you can type a function in TypeScript.
 
@@ -47,6 +47,8 @@ interface MyObj {
 ```
 
 But did you know if you use the method signature syntax (#3 above), it's actually not completely typesafe. 
+
+## strictFunctionTypes
 
 The [`strictFunctionTypes` flag in TSConfig](https://www.typescriptlang.org/tsconfig#strictFunctionTypes), when enabled (as it is with `strict: true`), causes functions parameters to be checked more correctly.
 
@@ -92,6 +94,8 @@ const MyAddingCall: PrintCall = {
 
 [TypeScript Playground](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgApVGAshMALAewBNkBvAWAChlkAHDcACjgC5kBnMBgc2QB9kIAK4BbAEbQAlG048A3FQC+VKpmjwkaBmACCUKAQDuZKjXqY2zGV1C8Bw8VOQBeAHwcbIbgsrLKq8HVEFHRMAGE4ABtIk2o6bTYKOJorDx5+QVEJKGk021NkPz8qBAIQTnjMADEhEAQXZFTZW0kXdwByPAhognafErKKrABPHSIiWxx8YjZQ8CnCEmdYmkrwNnNwGrrkAHpd5CE8ZAJjgFpkfGB2ZGuQdrBkGEi4bm4IEjgbuBBkaAMoEoVJRSuVHiMxhMvHoDIZZtoYUYGklVpswBttNt6vtLnhrrcbqV9BAEGBIsMni83h8gf4QYNwaNxrYItF4eEojFliizAk1mAsXsDlcbviiVASWSKc9Xu8iEogA)
 
-It's not all bad news - it will correctly catch it if the type changes completely, for instance from a \`string\` to a \`number\`, however I'd argue that that makes it even more insidious. 
+It's not all bad news - it *will* correctly catch it if the type changes completely, for instance from a \`string\` to a \`number\`, however I'd argue that that makes it even more insidious, sometimes it catches it, sometimes it doesn't.
 
-So anyway, long story short, you should avoid using the method syntax when typing your functions in TypeScript. Use the function syntax (or the call signature if you need the additional properties) and your code will be much type-safer for it!
+## What should you use?
+
+Long story short, you should avoid using the method syntax (even for classes) when typing your functions in TypeScript. Use the function syntax (or the call signature if you need the additional properties) and your code will be much type-safer for it!
