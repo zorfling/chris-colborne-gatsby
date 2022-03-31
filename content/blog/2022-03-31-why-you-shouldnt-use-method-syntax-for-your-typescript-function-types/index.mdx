@@ -1,0 +1,105 @@
+---
+title: Don't use method syntax for your TypeScript function types!
+path: dont-use-method-syntax-typescript-function-types
+date: 2022-03-31T10:43:29.065Z
+attribution: Illustration from unDraw
+description: In TypeScript, there are a few ways to type functions. But did you
+  know that using the method syntax to define your functions in TypeScript is
+  not type safe?
+status: PUBLISHED
+featuredImage: undraw_connection_b38q.png
+---
+In TypeScript, there are a few ways to type functions. But did you know that using the method syntax to define your functions in TypeScript is not type safe?
+
+## Typing Functions
+
+There are three main ways you can type a function in TypeScript.
+
+### 1. Function type expression syntax
+
+The most common and recommended way is to type it as a function type expression, which uses a syntax like an arrow function:
+
+```ts
+interface MyObj {
+  add: (a:number, b: number) => number
+}
+```
+
+### 2. Call signature syntax
+
+Another less common way is as a call signature. This is often useful if the function has properties as well as being callable.
+
+```ts
+interface MyObj {
+  add: {
+    description: string,
+    (a: number, b: number): number
+  }
+}
+```
+
+### 3. Method syntax
+
+The final way is method syntax. This often makes sense when talking about classes but is also valid for interfaces.
+
+```ts
+class MyCalculator {
+  add(a: number, b: number): number;
+}
+
+interface MyObj {
+  add(a: number, b: number): number;
+}
+```
+
+But did you know if you use the method signature syntax (#3 above), it's actually not completely typesafe. 
+
+## strictFunctionTypes flag in TSConfig
+
+The [`strictFunctionTypes` flag in TSConfig](https://www.typescriptlang.org/tsconfig#strictFunctionTypes), when enabled (as it is with `strict: true`), causes functions parameters to be checked more correctly.
+
+However [from the docs](https://www.typescriptlang.org/tsconfig#strictFunctionTypes): 
+
+> During development of this feature, we discovered a large number of inherently unsafe class hierarchies, including some in the DOM. Because of this, the setting only applies to functions written in function syntax, not to those in method syntax.
+
+That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply! 🙀
+
+Let's see an example.
+
+```ts
+interface PrintMethod {
+  print(a: string | number): string;
+}
+
+interface PrintFunction {
+  print: (a: string | number) => string;
+}
+
+interface PrintCall {
+  print: {
+    (a: string | number): string
+  }
+}
+
+const printFunc = (a: string) => 'hello';
+
+const MyAddingMethod: PrintMethod = {
+   print: printFunc // uh oh - this isn't flagged as an error
+}
+
+const MyAddingFunction: PrintFunction = {
+   print: printFunc // this is correctly flagged
+}
+
+const MyAddingCall: PrintCall = {
+   print: printFunc // this is correctly flagged
+}
+```
+
+[TypeScript Playground](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgApVGAshMALAewBNkBvAWAChlkAHDcACjgC5kBnMBgc2QB9kIAK4BbAEbQAlG048A3FQC+VKpmjwkaBmACCUKAQDuZKjXqY2zGV1C8Bw8VOQBeAHwcbIbgsrLKq8HVEFHRMAGE4ABtIk2o6bTYKOJorDx5+QVEJKGk021NkPz8qBAIQTnjMADEhEAQXZFTZW0kXdwByPAhognafErKKrABPHSIiWxx8YjZQ8CnCEmdYmkrwNnNwGrrkAHpd5CE8ZAJjgFpkfGB2ZGuQdrBkGEi4bm4IEjgbuBBkaAMoEoVJRSuVHiMxhMvHoDIZZtoYUYGklVpswBttNt6vtLnhrrcbqV9BAEGBIsMni83h8gf4QYNwaNxrYItF4eEojFliizAk1mAsXsDlcbviiVASWSKc9Xu8iEogA)
+
+It's not all bad news - it *will* correctly catch it if the type changes completely, for instance from a \`string\` to a \`number\`, however I'd argue that that makes it even more insidious, sometimes it catches it, sometimes it doesn't.
+
+## What should you use?
+
+Long story short, you should avoid using the method syntax (even for classes) when typing your functions in TypeScript. Use the function syntax (or the call signature if you need the additional properties) and your code will be much type-safer for it!
