@@ -45,7 +45,7 @@ interface WithAdd {
   add(a: number, b: number): number;
 }
 ```
-But did you know if you use the method signature syntax (#3 above), it's actually not completely typesafe.
+But did you know if you use the method signature syntax (#3 above), it's actually not completely typesafe. 
 
 The `strictFunctionTypes` flag in tsConfig, when enabled (as it is with `strict: true`), causes functions parameters to be checked more correctly.
 
@@ -55,10 +55,38 @@ However from the docs:
 
 https://www.typescriptlang.org/tsconfig#strictFunctionTypes
 
-That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply!
+That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply! In particular, this means when you're assigning a more specific type to a less specific type, it isn't flagged.
 
 Let's see an example.
 
 ```ts
+interface PrintMethod {
+  print(a: string | number): string;
+}
 
+
+interface PrintArrow {
+  print: (a: string | number) => string;
+}
+interface PrintCall {
+  print: {
+    (a: string | number): string
+  }
+}
+
+
+const printFunc = (a: string) => 'hello';
+
+
+
+const MyAddingMethod: PrintMethod = {
+   print: printFunc // uh oh - this isn't flagged as an error
+}
+
+const MyAddingArrow: PrintArrow = {
+   print: printFunc // this is correctly flagged
+}
+const MyAddingCall: PrintCall = {
+   print: printFunc // this is correctly flagged
+}
 ```
