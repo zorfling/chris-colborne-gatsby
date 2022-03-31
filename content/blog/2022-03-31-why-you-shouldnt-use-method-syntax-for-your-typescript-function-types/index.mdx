@@ -2,45 +2,63 @@
 title: Why you shouldn't use method syntax for your Typescript function types
 path: dont-use-method-syntax-typescript-function-types
 date: 2022-03-31T10:43:29.065Z
-attribution: asdfasdf
-description: asdfasdf
+attribution: Photo by Jim
+description: In TypeScript, there are a few ways to type functions. But did you
+  know that using the method syntax to define your functions in TypeScript is
+  not type safe?
 status: DRAFT
 featuredImage: screen-shot-2021-03-17-at-3.51.47-pm.png
 ---
 In TypeScript, there are a few ways to type functions. But did you know that using the method syntax to define your functions in TypeScript is not type safe?
 
+--
 
-You can type it as an arrow function
+There are three main ways you can type a function in Typescript.
+
+The most common and recommended way is to type it as an arrow function:
 
 ```ts
 interface MyObj {
-  myFunc: () => void
+  add: (a:number, b: number) => number
 }
 ```
 
-or as a call signature:
+Another less common way is as a call signature. This is often useful if the function has properties as well as being callable.
 
 ```ts
 interface MyObj {
-  myFunc: {
-    (): void
+  add: {
+    coolMetadata: string,
+    (a: number, b: number): number
   }
 }
 ```
 
-or as a method signature
+The final way is as a method signature. This often makes sense when talking about classes, but is also valid for interfaces.
 
 ```ts
-interface MyObj {
-  myFunc(): void
+class MyCalculator {
+  add(a: number, b: number): number;
+}
+
+interface WithAdd {
+  add(a: number, b: number): number;
 }
 ```
+But did you know if you use the method signature syntax (#3 above), it's actually not completely typesafe.
 
+The `strictFunctionTypes` flag in tsConfig, when enabled (as it is with `strict: true`), causes functions parameters to be checked more correctly.
 
-From the docs:
+However from the docs: 
 
-> During development of this feature, we discovered a large number of inherently unsafe class hierarchies, including some in the DOM. Because of this, the setting only applies to functions written in function syntax, not to those in method syntax:
+> During development of this feature, we discovered a large number of inherently unsafe class hierarchies, including some in the DOM. Because of this, the setting only applies to functions written in function syntax, not to those in method syntax.
 
 https://www.typescriptlang.org/tsconfig#strictFunctionTypes
 
-That means, that if you 
+That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply!
+
+Let's see an example.
+
+```ts
+
+```
