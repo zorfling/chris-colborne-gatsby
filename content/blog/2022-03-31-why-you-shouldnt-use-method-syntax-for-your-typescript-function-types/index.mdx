@@ -11,7 +11,7 @@ featuredImage: screen-shot-2021-03-17-at-3.51.47-pm.png
 ---
 In TypeScript, there are a few ways to type functions. But did you know that using the method syntax to define your functions in TypeScript is not type safe?
 
---
+\--
 
 There are three main ways you can type a function in Typescript.
 
@@ -45,9 +45,10 @@ interface WithAdd {
   add(a: number, b: number): number;
 }
 ```
+
 But did you know if you use the method signature syntax (#3 above), it's actually not completely typesafe. 
 
-The `strictFunctionTypes` flag in tsConfig, when enabled (as it is with `strict: true`), causes functions parameters to be checked more correctly.
+The [`strictFunctionTypes` flag in TSConfig](https://www.typescriptlang.org/tsconfig#strictFunctionTypes), when enabled (as it is with `strict: true`), causes functions parameters to be checked more correctly.
 
 However from the docs: 
 
@@ -55,7 +56,7 @@ However from the docs:
 
 https://www.typescriptlang.org/tsconfig#strictFunctionTypes
 
-That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply! In particular, this means when you're assigning a more specific type to a less specific type, it isn't flagged.
+That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply! In particular, when you're assigning a more specific type to a less specific type, it isn't flagged.
 
 Let's see an example.
 
@@ -64,29 +65,33 @@ interface PrintMethod {
   print(a: string | number): string;
 }
 
-
-interface PrintArrow {
+interface PrintFunction {
   print: (a: string | number) => string;
 }
+
 interface PrintCall {
   print: {
     (a: string | number): string
   }
 }
 
-
 const printFunc = (a: string) => 'hello';
-
-
 
 const MyAddingMethod: PrintMethod = {
    print: printFunc // uh oh - this isn't flagged as an error
 }
 
-const MyAddingArrow: PrintArrow = {
+const MyAddingFunction: PrintFunction = {
    print: printFunc // this is correctly flagged
 }
+
 const MyAddingCall: PrintCall = {
    print: printFunc // this is correctly flagged
 }
 ```
+
+[TypeScript Playground](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgApVGAshMALAewBNkBvAWAChlkAHDcACjgC5kBnMBgc2QB9kIAK4BbAEbQAlG048A3FQC+VKpmjwkaBmACCUKAQDuZKjXqY2zGV1C8Bw8VOQBeAHwcbIbgsrLKq8HVEFHRMAGE4ABtIk2o6bTYKOJorDx5+QVEJKGk021NkPz8qBAIQTnjMADEhEAQXZFTZW0kXdwByPAhognafErKKrABPHSIiWxx8YjZQ8CnCEmdYmkrwNnNwGrrkAHpd5CE8ZAJjgFpkfGB2ZGuQdrBkGEi4bm4IEjgbuBBkaAMoEoVJRSuVHiMxhMvHoDIZZtoYUYGklVpswBttNt6vtLnhrrcbqV9BAEGBIsMni83h8gf4QYNwaNxrYItF4eEojFliizAk1mAsXsDlcbviiVASWSKc9Xu8iEogA)
+
+It's not all bad news - it will correctly catch it if the type changes completely, however I'd argue that having it sometimes work is actually probably worse than always fail. 
+
+So anyway, long story short, don't use method syntax. Always use the function syntax (or the call signature if you need the additional properties) and your code will be much type-safer for it!
