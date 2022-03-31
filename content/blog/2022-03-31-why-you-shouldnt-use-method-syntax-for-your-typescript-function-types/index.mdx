@@ -2,12 +2,12 @@
 title: Why you shouldn't use method syntax for your Typescript function types
 path: dont-use-method-syntax-typescript-function-types
 date: 2022-03-31T10:43:29.065Z
-attribution: Photo by Jim
+attribution: Illustration from unDraw
 description: In TypeScript, there are a few ways to type functions. But did you
   know that using the method syntax to define your functions in TypeScript is
   not type safe?
 status: DRAFT
-featuredImage: screen-shot-2021-03-17-at-3.51.47-pm.png
+featuredImage: undraw_connection_b38q.png
 ---
 In TypeScript, there are a few ways to type functions. But did you know that using the method syntax to define your functions in TypeScript is not type safe?
 
@@ -28,7 +28,7 @@ Another less common way is as a call signature. This is often useful if the func
 ```ts
 interface MyObj {
   add: {
-    coolMetadata: string,
+    description: string,
     (a: number, b: number): number
   }
 }
@@ -41,7 +41,7 @@ class MyCalculator {
   add(a: number, b: number): number;
 }
 
-interface WithAdd {
+interface MyObj {
   add(a: number, b: number): number;
 }
 ```
@@ -56,7 +56,7 @@ However from the docs:
 
 https://www.typescriptlang.org/tsconfig#strictFunctionTypes
 
-That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply! In particular, when you're assigning a more specific type to a less specific type, it isn't flagged.
+That means, if you type your function with the method syntax, `strictFunctionTypes` does not apply! 🙀
 
 Let's see an example.
 
@@ -92,6 +92,6 @@ const MyAddingCall: PrintCall = {
 
 [TypeScript Playground](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgApVGAshMALAewBNkBvAWAChlkAHDcACjgC5kBnMBgc2QB9kIAK4BbAEbQAlG048A3FQC+VKpmjwkaBmACCUKAQDuZKjXqY2zGV1C8Bw8VOQBeAHwcbIbgsrLKq8HVEFHRMAGE4ABtIk2o6bTYKOJorDx5+QVEJKGk021NkPz8qBAIQTnjMADEhEAQXZFTZW0kXdwByPAhognafErKKrABPHSIiWxx8YjZQ8CnCEmdYmkrwNnNwGrrkAHpd5CE8ZAJjgFpkfGB2ZGuQdrBkGEi4bm4IEjgbuBBkaAMoEoVJRSuVHiMxhMvHoDIZZtoYUYGklVpswBttNt6vtLnhrrcbqV9BAEGBIsMni83h8gf4QYNwaNxrYItF4eEojFliizAk1mAsXsDlcbviiVASWSKc9Xu8iEogA)
 
-It's not all bad news - it will correctly catch it if the type changes completely, however I'd argue that having it sometimes work is actually probably worse than always fail. 
+It's not all bad news - it will correctly catch it if the type changes completely, for instance from a \`string\` to a \`number\`, however I'd argue that that makes it even more insidious. 
 
-So anyway, long story short, don't use method syntax. Always use the function syntax (or the call signature if you need the additional properties) and your code will be much type-safer for it!
+So anyway, long story short, you should avoid using the method syntax when typing your functions in TypeScript. Use the function syntax (or the call signature if you need the additional properties) and your code will be much type-safer for it!
