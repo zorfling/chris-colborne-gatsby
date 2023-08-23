@@ -77,8 +77,7 @@ const AboutPage: FC<PageProps<GraphqlTypes.AboutPageQuery>> = ({
             <span role="img" aria-label="Australian flag">
               🇦🇺
             </span>
-            . I specialise in building custom web applications, primarily with
-            TypeScript.
+            . I specialise in building custom web applications with TypeScript.
           </p>
         </Intro>
       </Container>
