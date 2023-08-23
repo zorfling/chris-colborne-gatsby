@@ -78,17 +78,12 @@ const AboutPage: FC<PageProps<GraphqlTypes.AboutPageQuery>> = ({
               🇦🇺
             </span>
             . I specialise in building custom web applications, primarily with
-            JavaScript and PHP.
+            TypeScript.
           </p>
         </Intro>
       </Container>
       <p>
-        I'm also a father to a beautiful {age} year old daughter, and husband to
-        a crazy Hungarian{' '}
-        <span role="img" aria-label="Hungarian flag">
-          🇭🇺
-        </span>
-        .
+        I'm also a father to a beautiful {age} year old daughter.
       </p>
 
       <p>
