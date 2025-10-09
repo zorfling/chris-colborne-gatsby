@@ -81,9 +81,7 @@ const AboutPage: FC<PageProps<GraphqlTypes.AboutPageQuery>> = ({
           </p>
         </Intro>
       </Container>
-      <p>
-        I'm also a father to a beautiful {age} year old daughter.
-      </p>
+      <p>I'm also a father to a beautiful {age} year old daughter.</p>
 
       <p>
         I post here about whatever occupies my mind, but it will be mostly tech.
@@ -91,6 +89,10 @@ const AboutPage: FC<PageProps<GraphqlTypes.AboutPageQuery>> = ({
       <p>
         You can find me on{' '}
         <OutboundLink href="https://twitter.com/zorfling">Twitter</OutboundLink>
+        ,{' '}
+        <OutboundLink href="https://instagram.com/chris_colborne">
+          Instagram
+        </OutboundLink>
         ,{' '}
         <OutboundLink href="https://www.facebook.com/zorfling">
           Facebook
